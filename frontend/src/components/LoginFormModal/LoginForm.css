@@ -4,7 +4,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-top: 15%;
+  padding-top: 7%;
 }
 
 input,
@@ -46,5 +46,5 @@ input:focus {
 
 .errors-list{
   margin-bottom: 10px;
-  
+
 }
