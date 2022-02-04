@@ -11,12 +11,9 @@ input, label {
     display:block;
 }
 
-
 /* labels on top
 .user-input, .password-input{
-    position: static ;
 } */
-
 
 input {
   margin: 12px;
