@@ -1,0 +1,44 @@
+.login-form {
+  font-family: sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 15%;
+}
+
+input, label {
+    display:block;
+}
+
+
+/* labels on top
+.user-input, .password-input{
+    position: static ;
+} */
+
+
+input {
+  margin: 12px;
+  border: 1px solid rgb(60, 18, 160);
+  border-radius: 5px;
+}
+
+.login-button {
+  text-align: center;
+  border: 1px solid rgb(60, 18, 160);
+  border-radius: 5px;
+  padding: 5px;
+  width: 50px;
+}
+
+.login-button:hover {
+  background: rgb(60, 18, 160);
+  transition: all;
+  color: white;
+}
+
+input:focus {
+  outline: 1px solid rgb(60, 18, 160);
+  border: 1px solid rgb(60, 18, 160);
+}

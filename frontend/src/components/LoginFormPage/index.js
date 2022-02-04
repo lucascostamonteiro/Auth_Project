@@ -26,13 +26,14 @@ function LoginFormPage() {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <ul>
+        <form className='login-form' onSubmit={handleSubmit}>
+            <ul className='errors'>
                 {errors.map((error, idx) => <li key={idx}>{error}</li>)}
             </ul>
             <label>
                 Username or Email
                 <input
+                    className='user-input'
                     type="text"
                     value={credential}
                     onChange={(e) => setCredential(e.target.value)}
@@ -42,13 +43,14 @@ function LoginFormPage() {
             <label>
                 Password
                 <input
+                    className='password-input'
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
                 />
             </label>
-            <button type="submit">Log In</button>
+            <button className='login-button' type="submit">Log In</button>
         </form>
     );
 }
