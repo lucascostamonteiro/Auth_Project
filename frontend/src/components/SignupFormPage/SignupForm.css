@@ -1,4 +1,4 @@
-.login-form {
+.signup-form {
   font-family: sans-serif;
   display: flex;
   flex-direction: column;
@@ -7,9 +7,8 @@
   padding-top: 15%;
 }
 
-input,
-label {
-  display: block;
+input, label {
+    display:block;
 }
 
 /* labels on top
@@ -21,10 +20,10 @@ input {
   border: 1px solid rgb(60, 18, 160);
   border-radius: 5px;
   width: 200px;
-  height: 24px;
+  height: 20px;
 }
 
-.login-button {
+.signup-button {
   text-align: center;
   border: 1px solid rgb(60, 18, 160);
   border-radius: 5px;
@@ -33,7 +32,7 @@ input {
   width: 70px;
 }
 
-.login-button:hover {
+.signup-button:hover {
   background: rgb(60, 18, 160);
   transition: all;
   color: white;
@@ -46,5 +45,5 @@ input:focus {
 
 .errors-list{
   margin-bottom: 10px;
-  
+
 }
