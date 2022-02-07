@@ -1,49 +1,8 @@
-.signup-form {
-  font-family: sans-serif;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding-top: 7%;
-}
-
-input, label {
-    display:block;
-}
-
-/* labels on top
-.user-input, .password-input{
-} */
-
-input {
-  margin: 12px;
-  border: 1px solid rgb(60, 18, 160);
-  border-radius: 5px;
-  width: 200px;
-  height: 20px;
-}
-
-.signup-button {
+#signup {
   text-align: center;
   border: 1px solid rgb(60, 18, 160);
   border-radius: 5px;
   margin-top: 10px;
   padding: 7px;
   width: 70px;
-}
-
-.signup-button:hover {
-  background: rgb(60, 18, 160);
-  transition: all;
-  color: white;
-}
-
-input:focus {
-  outline: 1px solid rgb(60, 18, 160);
-  border: 1px solid rgb(60, 18, 160);
-}
-
-.errors-list{
-  margin-bottom: 10px;
-
 }

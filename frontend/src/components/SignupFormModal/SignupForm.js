@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import * as sessionActions from "../../store/session";
-import './SignupForm.css';
+import './SignupFormModal.css';
 
 function SignupForm() {
     const dispatch = useDispatch();
@@ -27,9 +27,11 @@ function SignupForm() {
     return (
         <form onSubmit={handleSubmit}>
             <ul className='errors-list'>
-                {errors.map((error, idx) =>
-                    (<li className='error' key={idx}>{error}</li>))}
+                {errors.map((error, idx) => (
+                    <li className='error' key={idx}>{error}</li>
+                ))}
             </ul>
+            <div className="input-div">
                 <input
                     type="text"
                     value={email}
@@ -58,7 +60,8 @@ function SignupForm() {
                     placeholder='Confirm Password'
                     required
                 />
-            <button className='signup-button' type="submit">Sign Up</button>
+                <button id="signup" className='signup-button' type="submit">Sign Up</button>
+            </div>
         </form>
     );
 }
