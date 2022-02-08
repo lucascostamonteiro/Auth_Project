@@ -10,7 +10,7 @@ function Demo() {
         return dispatch(sessionActions.login({ credential, password })).catch(
             async (res) => { await res.json() })
     };
-    
+
     return (
         <button className='demo-button' onClick={demoLogin}>Demo User</button>
     );
