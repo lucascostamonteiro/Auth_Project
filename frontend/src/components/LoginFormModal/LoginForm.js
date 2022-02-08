@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import * as sessionActions from "../../store/session";
 import { useDispatch } from "react-redux";
-import Demo from "../Demo User";
+import Demo from "../DemoUser";
 import './LoginFormModal.css'
 
 function LoginForm() {

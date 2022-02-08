@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
   Image.associate = function (models) {
     // TODO DOUBLE CHECK THIS
     Image.belongsTo(models.User, { foreignKey: 'userId' });
-    Image.belongsTo(models.Album, {foreignKey: 'albumId'})
+    Image.belongsTo(models.Album, { foreignKey: 'albumId' });
   };
   return Image;
 };
