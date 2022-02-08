@@ -6,7 +6,8 @@ module.exports = (sequelize, DataTypes) => {
     imageUrl: DataTypes.STRING,
     content: DataTypes.TEXT
   }, {});
-  Image.associate = function(models) {
+  Image.associate = function (models) {
+    // TODO DOUBLE CHECK THIS
     Image.belongsTo(models.User, { foreignKey: 'userId' });
     Image.belongsTo(models.Album, {foreignKey: 'albumId'})
   };
