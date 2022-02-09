@@ -4,15 +4,19 @@ import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
+import NewImageFormModal from '../NewImageFormModal';
 import './Navigation.css';
 
 function Navigation({ isLoaded }) {
     const sessionUser = useSelector(state => state.session.user);
-
     let sessionLinks;
     if (sessionUser) {
         sessionLinks = (
-            <ProfileButton user={sessionUser} />
+            <>
+                <ProfileButton user={sessionUser} />
+                <NewImageFormModal />
+            </>
+
         );
     } else {
         sessionLinks = (
@@ -22,14 +26,17 @@ function Navigation({ isLoaded }) {
             </>
         );
     }
-
     return (
-        <ul>
-            <li>
-                <NavLink exact to="/">Home</NavLink>
-                {isLoaded && sessionLinks}
-            </li>
-        </ul>
+        <>
+            <div className='main-navbar'>
+                <span className='left-navbar'>
+                    <NavLink exact to="/">Estádium</NavLink>
+                </span>
+                <span className='right-navbar'>
+                    {isLoaded && sessionLinks}
+                </span>
+            </div>
+        </>
     );
 }
 

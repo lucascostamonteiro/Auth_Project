@@ -33,6 +33,7 @@ export const getImages = () => async dispatch => {
 
 
 export const addImage = data => async dispatch => {
+    // console.log("DATA", data);
     const res = await csrfFetch(`/api/images`, {
         method: "POST",
         body: JSON.stringify(data)
@@ -62,13 +63,22 @@ export const eraseImage = data => async dispatch => {
 };
 
 
-// TODO REDUCERS
+// TODO REDUCER
 
-// const imageReducer = (state = initialState, action) => {
-//     switch (action.type)
-//         case LOAD: {
-//         const newState = {};
-//         }
-//     default:
-//         return state;
-// }
+let initialState = {};
+
+const imageReducer = (state = initialState, action) => {
+    switch (action.type) {
+        case LOAD: {
+            const newState = {};
+            action.images.forEach(image => {
+                newState[image.id] = image;
+            })
+            return newState;
+        }
+        default:
+            return state;
+    }
+}
+
+export default imageReducer;
