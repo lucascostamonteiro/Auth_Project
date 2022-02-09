@@ -23,8 +23,9 @@ router.get('/', asyncHandler(async (req, res) => {
 
 // TODO post image
 router.post('/', asyncHandler(async (req, res) => {
-    const{imageUrl, content} = req.body
-    // TODO CHECK 
+    // const{imageUrl, content} = req.body
+    console.log('+++REQ+++', req.body)
+    // TODO CHECK
     const image = await Image.create(req.body);
     res.json(image);
 }));

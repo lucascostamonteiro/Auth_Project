@@ -76,6 +76,19 @@ const imageReducer = (state = initialState, action) => {
             })
             return newState;
         }
+
+        case CREATE: {
+            const newState = { [action.image.id]: action.image, ...state };
+            return newState;
+        }
+
+        case DELETE: {
+            const newState = { ...state };
+            newState.find(image => image.id === action.imageId);
+            delete newState[action.imageId];
+            return newState;
+        }
+
         default:
             return state;
     }

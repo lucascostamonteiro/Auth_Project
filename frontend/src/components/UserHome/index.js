@@ -2,6 +2,7 @@ import React from "react";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getImages } from "../../store/images";
+import SingleImage from "../SingleImage";
 
 
 function UserHome() {
@@ -16,7 +17,7 @@ function UserHome() {
     return (
         <ul>
             {images?.map((image) => (
-                <img key={image.id} src={image.imageUrl} alt={image.content}></img>
+                <SingleImage key={image.id} image={image} />
             ))}
         </ul>
     )
