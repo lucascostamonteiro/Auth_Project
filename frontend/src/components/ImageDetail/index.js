@@ -1,17 +1,25 @@
-import React from "react";
-import ContentEditable from "react-contenteditable";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { eraseImage } from "../../store/images";
 import { editDescription } from "../../store/images";
 import './ImageDetail.css';
 
-function ImageDetail({ image, description, showModal }) {
+function ImageDetail({ image, showModal }) {
     const dispatch = useDispatch();
-    const imagesObj = useSelector(state => state.images);
-    const images = Object.values(imagesObj);
-    const contentTitle = images.content
-    console.log('DEBUG', images);
-    console.log('DEBUG+++++++',);
+    const [editable, setEditable] = useState(false);
+    const [imageUrl, setImageUrl] = useState(image.imageUrl);
+    const [content, setContent] = useState(image.content);
+
+
+    const handleSubmit = e => {
+        e.preventDefault();
+        dispatch(editDescription({ imageUrl, content, id: image.id }))
+            .catch(async (res) => {
+                const data = await res.json();
+                if (data && data.errors) setErrors(data.errors);
+            });
+        setEditable(!editable);
+    }
 
     const deleteImage = async (e) => {
         e.preventDefault();
@@ -19,25 +27,35 @@ function ImageDetail({ image, description, showModal }) {
         showModal(false);
     };
 
-    const editImage = async (e) => {
-        e.preventDefault();
-        dispatch(editDescription(description));
-    };
-
     return (
         <div className="image-detail-div">
+            <h2>{image.content}</h2>
             <img
                 className="single-image-detail"
                 key={image.id}
                 src={image.imageUrl}
                 alt={image.content}>
             </img>
-            <ContentEditable
-                html {className = "image-title" > { image.content }}
-            />
-            <button onClick={editImage}>
+            <button onClick={() => { setEditable(!editable) }}>
                 <i className="far fa-edit"></i>
             </button>
+            {editable && (
+                <form onSubmit={handleSubmit}>
+                    <input
+                        name='imageUrl'
+                        type="text"
+                        value={imageUrl}
+                        onChange={(e) => setImageUrl(e.target.value)}
+                    />
+                    <input
+                        name='content'
+                        type="text"
+                        value={content}
+                        onChange={(e) => setContent(e.target.value)}
+                    />
+                    <button type="submit">Submit</button>
+                </form>
+            )}
             <button onClick={deleteImage}>
                 <i className="far fa-trash-alt"></i>
             </button >

@@ -20,10 +20,9 @@ const deleteImage = image => ({
     image
 });
 
-const editImage = (image, content) => ({
+const editImage = image => ({
     type: EDIT,
-    image,
-    content
+    image
 });
 
 
@@ -116,7 +115,7 @@ const imageReducer = (state = initialState, action) => {
 
         case EDIT: {
             console.log('+++DEBUG+++', action.image)
-            const newState = { ...state, [action.image.content]: action.content }
+            const newState = { ...state, [action.image.id]: action.image }
             return newState;
         }
 

@@ -6,13 +6,20 @@ const { Image } = require('../../db/models');
 
 const router = express.Router();
 
-// const imageValidation = [
-//     check('imageUrl')
-//         .exists({ checkFalsy: true })
-//         .isURL()
-//         .withMessage('Please provide a valid url.'),
-//     handleValidationErrors,
-// ];
+const imageValidation = [
+    check('imageUrl')
+        .exists({ checkFalsy: true })
+        .isURL()
+        .withMessage('Please provide a valid url.'),
+    handleValidationErrors,
+];
+
+const editValidation = [
+    check('content')
+        .exists({ checkFalsy: true })
+        .isLength({ min: 4 })
+        .withMessage('Please provide a content with at least 4 characters.'),
+]
 
 // get images
 router.get('/', asyncHandler(async (req, res) => {
@@ -21,7 +28,7 @@ router.get('/', asyncHandler(async (req, res) => {
 }));
 
 // TODO post image
-router.post('/', asyncHandler(async (req, res) => {
+router.post('/', imageValidation, asyncHandler(async (req, res) => {
     const image = await Image.create(req.body);
     res.json(image);
 }));
@@ -35,11 +42,12 @@ router.delete('/', asyncHandler(async (req, res) => {
 }));
 
 //TODO edit content for a specific image
-router.put('/', asyncHandler(async (req, res) => {
-    // const { imageId, content } = req.body
-    console.log('+++REQ+++', req.body)
+router.put('/', editValidation, imageValidation, asyncHandler(async (req, res) => {
+    // console.log('+++REQ+++', req.body)
     const image = await Image.findByPk(req.body.id);
-    console.log('===IMAGE===', image)
+    image.set(req.body);
+    await image.save();
+    res.json(image);
 }))
 
 
