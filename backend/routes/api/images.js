@@ -36,9 +36,7 @@ router.delete('/', asyncHandler(async (req, res) => {
 }));
 
 //TODO edit content for a specific image
-// router.put('/:id(\\d+', asyncHandler(async (req, res) => {
-//     const {imageId, content} = req.body
-// }))
+
 
 
 

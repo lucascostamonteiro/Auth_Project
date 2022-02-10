@@ -1,0 +1,11 @@
+.image-detail-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.single-image-detail {
+  max-width: 50%;
+  height: auto;
+}

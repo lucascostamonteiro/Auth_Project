@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import { eraseImage } from "../../store/images";
 import './ImageDetail.css';
@@ -13,8 +13,9 @@ function ImageDetail({ image, showModal }) {
     };
 
     return (
-        <div>
+        <div className="image-detail-div">
             <img
+                className="single-image-detail"
                 key={image.id}
                 src={image.imageUrl}
                 alt={image.content}>

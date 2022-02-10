@@ -1,8 +1,12 @@
-/* .image-div {
-  font-family: sans-serif;
+.image-div {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   padding-top: 7%;
-} */
+}
+
+.single-image {
+  max-width: 50%;
+  height: auto;
+}

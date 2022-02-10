@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Modal } from '../../context/Modal';
 import ImageDetail from '../ImageDetail';
+import './SingleImage.css'
 
 
 const SingleImage = ({ image }) => {
@@ -12,7 +13,9 @@ const SingleImage = ({ image }) => {
                 onClick={() => setShowModal(true)}
                 key={image.id}
                 src={image.imageUrl}
-                alt={image.content}>
+                alt={image.content}
+                className="single-image"
+            >
             </img>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>

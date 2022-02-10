@@ -54,8 +54,8 @@ export const eraseImage = data => async dispatch => {
         body: JSON.stringify(data)
     });
     if (res.ok) {
-        const image = await res.json();
-        dispatch(deleteImage(image));
+        // const image = await res.json();
+        dispatch(deleteImage(data));
         return;
     } else {
         const errors = await res.json();
