@@ -11,6 +11,8 @@ function NewImageForm({showModal}) {
     const [errors, setErrors] = useState([]);
     const sessionUser = useSelector(state => state.session.user);
 
+    // TODO validate insde handleSubmit so it only shows after 
+
     useEffect(() => {
         const validationErrors = [];
         if (!imageUrl.length) validationErrors.push("Please provide a valid URL");

@@ -6,7 +6,7 @@ import './SingleImage.css'
 
 const SingleImage = ({ image }) => {
     const [showModal, setShowModal] = useState(false);
-
+    
     return (
         <div className='image-div'>
             <img
@@ -19,7 +19,7 @@ const SingleImage = ({ image }) => {
             </img>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
-                    <ImageDetail image={image} showModal={setShowModal} />
+                    <ImageDetail image={image} description={image.content} showModal={setShowModal} />
                 </Modal>
             )}
         </div>

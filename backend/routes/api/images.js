@@ -28,7 +28,6 @@ router.post('/', asyncHandler(async (req, res) => {
 
 // TODO delete image
 router.delete('/', asyncHandler(async (req, res) => {
-    console.log('REQ', req.body)
     const image = await Image.findByPk(req.body.id);
     // console.log('+++DELETE+++', image);
     await image.destroy();
@@ -36,7 +35,12 @@ router.delete('/', asyncHandler(async (req, res) => {
 }));
 
 //TODO edit content for a specific image
-
+router.put('/', asyncHandler(async (req, res) => {
+    // const { imageId, content } = req.body
+    console.log('+++REQ+++', req.body)
+    const image = await Image.findByPk(req.body.id);
+    console.log('===IMAGE===', image)
+}))
 
 
 

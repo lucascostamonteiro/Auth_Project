@@ -1,15 +1,27 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import ContentEditable from "react-contenteditable";
+import { useDispatch, useSelector } from "react-redux";
 import { eraseImage } from "../../store/images";
+import { editDescription } from "../../store/images";
 import './ImageDetail.css';
 
-function ImageDetail({ image, showModal }) {
+function ImageDetail({ image, description, showModal }) {
     const dispatch = useDispatch();
+    const imagesObj = useSelector(state => state.images);
+    const images = Object.values(imagesObj);
+    const contentTitle = images.content
+    console.log('DEBUG', images);
+    console.log('DEBUG+++++++',);
 
     const deleteImage = async (e) => {
         e.preventDefault();
         dispatch(eraseImage(image));
         showModal(false);
+    };
+
+    const editImage = async (e) => {
+        e.preventDefault();
+        dispatch(editDescription(description));
     };
 
     return (
@@ -20,7 +32,12 @@ function ImageDetail({ image, showModal }) {
                 src={image.imageUrl}
                 alt={image.content}>
             </img>
-            <p className="image-title">{image.content}</p>
+            <ContentEditable
+                html {className = "image-title" > { image.content }}
+            />
+            <button onClick={editImage}>
+                <i className="far fa-edit"></i>
+            </button>
             <button onClick={deleteImage}>
                 <i className="far fa-trash-alt"></i>
             </button >
