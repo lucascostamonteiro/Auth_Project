@@ -19,7 +19,7 @@ const SingleImage = ({ image }) => {
             </img>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
-                    <ImageDetail image={image} showModal={showModal} />
+                    <ImageDetail image={image} showModal={setShowModal} />
                 </Modal>
             )}
         </div>
