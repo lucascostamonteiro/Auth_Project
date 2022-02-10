@@ -12,7 +12,7 @@ function NewImageFormModal() {
                 onClick={() => setShowModal(true)}>New Image</button>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)}>
-                    <NewImageForm />
+                    <NewImageForm showModal={setShowModal}/>
                 </Modal>
             )}
         </>

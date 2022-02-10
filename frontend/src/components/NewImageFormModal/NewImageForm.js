@@ -1,48 +1,34 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { addImage } from "../../store/images";
 import { useEffect } from "react";
-// import './NewImageFormModal.css';
+import './NewImageForm.css';
 
-function NewImageForm() {
+function NewImageForm({showModal}) {
     const dispatch = useDispatch();
-    const history = useHistory();
     const [imageUrl, setImageUrl] = useState("");
     const [content, setContent] = useState("");
     const [errors, setErrors] = useState([]);
+    const sessionUser = useSelector(state => state.session.user);
 
-    const reset = () => {
-        imageUrl("");
-        content("");
-    };
-
-    const validate = () => {
+    useEffect(() => {
         const validationErrors = [];
         if (!imageUrl.length) validationErrors.push("Please provide a valid URL");
         if (imageUrl.length > 0 && !imageUrl.match(/^https?:\/\/.+\/.+$/)) validationErrors.push("Please provide a valid URL");
         if (!content.length) validationErrors.push("Please provide a description");
-        return validationErrors;
-    }
+        setErrors(validationErrors);
+    }, [imageUrl, content])
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const errors = validate();
-        if (imageUrl && content) {
-            setErrors([]);
-            dispatch(addImage({ imageUrl, content }))
-            history.push('/');
-            reset();
-        } else if (errors.length > 0) setErrors(errors);
-    };
-
-    // useEffect(() => {
-    //     const validationErrors = [];
-    //     if (!imageUrl.length) validationErrors.push("Please provide a valid URL");
-    //     if (imageUrl.length > 0 && !imageUrl.match(/^https?:\/\/.+\/.+$/)) validationErrors.push("Please provide a valid URL");
-    //     if (!content.length) validationErrors.push("Please provide a description");
-    //     setErrors(validationErrors);
-    // }, [imageUrl, content])
+        const data = {
+            userId: sessionUser.id,
+            imageUrl,
+            content
+        };
+        dispatch(addImage(data));
+        showModal(false);
+    }
 
     return (
         <form onSubmit={handleSubmit}>
