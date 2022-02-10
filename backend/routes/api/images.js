@@ -6,7 +6,6 @@ const { Image } = require('../../db/models');
 
 const router = express.Router();
 
-// TODO VALIDATION MIDDLEWARE
 // const imageValidation = [
 //     check('imageUrl')
 //         .exists({ checkFalsy: true })
@@ -23,20 +22,17 @@ router.get('/', asyncHandler(async (req, res) => {
 
 // TODO post image
 router.post('/', asyncHandler(async (req, res) => {
-    // const{imageUrl, content} = req.body
-    console.log('+++REQ+++', req.body)
-    // TODO CHECK
     const image = await Image.create(req.body);
     res.json(image);
 }));
 
 // TODO delete image
-router.delete('/:id(\\d+)', asyncHandler(async (req, res) => {
-    const image = await Image.findByPk(req.params.id);
-    // console.log('REQQQ', req.params)
+router.delete('/', asyncHandler(async (req, res) => {
+    console.log('REQ', req.body)
+    const image = await Image.findByPk(req.body.id);
     // console.log('+++DELETE+++', image);
     await image.destroy();
-    res.status(204).end();
+    return res.json({ message: 'success' });
 }));
 
 //TODO edit content for a specific image

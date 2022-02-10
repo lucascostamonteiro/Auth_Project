@@ -33,7 +33,6 @@ export const getImages = () => async dispatch => {
 
 
 export const addImage = data => async dispatch => {
-    // console.log("DATA", data);
     const res = await csrfFetch(`/api/images`, {
         method: "POST",
         body: JSON.stringify(data)
@@ -50,11 +49,13 @@ export const addImage = data => async dispatch => {
 
 
 export const eraseImage = data => async dispatch => {
-    const res = await csrfFetch(`/api/images/${data.id}`, {
-        method: "DELETE"
+    const res = await csrfFetch(`/api/images/`, {
+        method: "DELETE",
+        body: JSON.stringify(data)
     });
     if (res.ok) {
-        dispatch(deleteImage(data.id));
+        const image = await res.json();
+        dispatch(deleteImage(image));
         return;
     } else {
         const errors = await res.json();
@@ -65,7 +66,7 @@ export const eraseImage = data => async dispatch => {
 
 // TODO REDUCER
 
-let initialState = {};
+const initialState = {};
 
 const imageReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -84,7 +85,6 @@ const imageReducer = (state = initialState, action) => {
 
         case DELETE: {
             const newState = { ...state };
-            newState.find(image => image.id === action.imageId);
             delete newState[action.imageId];
             return newState;
         }

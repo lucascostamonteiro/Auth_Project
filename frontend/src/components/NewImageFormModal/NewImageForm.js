@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
 import { addImage } from "../../store/images";
 import { useEffect } from "react";
-// import './NewImageFormModal.css';
+import './NewImageForm.css';
 
 function NewImageForm({showModal}) {
     const dispatch = useDispatch();
-    const history = useHistory();
     const [imageUrl, setImageUrl] = useState("");
     const [content, setContent] = useState("");
     const [errors, setErrors] = useState([]);
@@ -28,12 +26,9 @@ function NewImageForm({showModal}) {
             imageUrl,
             content
         };
-        dispatch(addImage(data))
-        history.push('/');
+        dispatch(addImage(data));
         showModal(false);
     }
-
-
 
     return (
         <form onSubmit={handleSubmit}>
