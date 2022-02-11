@@ -33,48 +33,53 @@ function ImageDetail({ image, showModal }) {
 
     return (
         <div className="image-detail-div">
-            <h2>{image.content}</h2>
+            <h2 className="single-image-title-detail">{image.content}</h2>
             <img
                 className="single-image-detail"
                 key={image.id}
                 src={image.imageUrl}
                 alt={image.content}>
             </img>
-            <button onClick={() => { setEditable(!editable) }}>
-                <i className="far fa-edit"></i>
-            </button>
-            {editable && (
-                <form onSubmit={handleSubmit}>
-                    <ul className='errors-list'>
-                        {errors.map((error, idx) => (
-                            <li className='error' key={idx}>{error}</li>
-                        ))}
-                    </ul>
-                    <input
-                        name='imageUrl'
-                        type="text"
-                        value={imageUrl}
-                        onChange={(e) => setImageUrl(e.target.value)}
-                        required
-                    />
-                    <input
-                        name='content'
-                        type="text"
-                        value={content}
-                        onChange={(e) => setContent(e.target.value)}
-                        required
-                    />
-                    <button type="submit" >Submit Edit</button>
-                </form>
-            )}
-            <button onClick={deleteImage}>
-                <i className="far fa-trash-alt"></i>
-            </button >
-            <ul>
-                <li>
+            <div className="single-image-info-detail">
+
+                <button onClick={() => { setEditable(!editable) }}>
+                    <i className="far fa-edit"></i>
+                </button>
+                {editable && (
+                    <form className="edit-form" onSubmit={handleSubmit}>
+                        <ul className='errors-list'>
+                            {errors.map((error, idx) => (
+                                <li className='error' key={idx}>{error}</li>
+                            ))}
+                        </ul>
+                        <input
+                            name='imageUrl'
+                            type="text"
+                            value={imageUrl}
+                            onChange={(e) => setImageUrl(e.target.value)}
+                            placeholder="Image URL"
+                            required
+                        />
+                        <input
+                            name='content'
+                            type="text"
+                            value={content}
+                            onChange={(e) => setContent(e.target.value)}
+                            placeholder="Description"
+                            required
+                        />
+                        <button className="edit-button" type="submit" >Submit Edit</button>
+                    </form>
+                )}
+                <button onClick={deleteImage}>
+                    <i className="far fa-trash-alt"></i>
+                </button >
+                <ul>
+                    <li>
                     // TODO COMMENTS WILL GO HERE
-                </li>
-            </ul>
+                    </li>
+                </ul>
+            </div>
         </div>
     )
 }

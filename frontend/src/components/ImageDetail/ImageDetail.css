@@ -3,10 +3,33 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  clear: both;
+  border-radius: 20px;
 }
 
 .single-image-detail {
-  max-width: 50%;
-  height: auto;
+  max-width: 50vw;
+  max-height: 60vh;
+}
+
+/* .single-image-info-detail {
+
+} */
+
+/* .single-image-title-detail{
+
+} */
+
+.edit-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 0.5px solid black;
+  padding: 1.5px 3.5px 12.5px 3.5px;
+  margin: 15px 40px;
+  border-radius: 10px;
+}
+
+.edit-button {
+  justify-content: center;
+  width: 86px;
 }
