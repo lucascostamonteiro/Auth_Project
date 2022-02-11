@@ -1,7 +1,7 @@
 const express = require('express');
 const asyncHandler = require('express-async-handler');
 const { check } = require('express-validator');
-// const requireAuth =require()
+const { requireAuth } = require('../../utils/auth')
 const { Comment } = require('../../db/models/comment');
 const { Image } = require('../../db/models/image')
 const { User } = require('../../db/models/user')
@@ -18,7 +18,7 @@ const commentValidation = [
 
 // TODO get comments for a specific image
 router.get('/', asyncHandler(async (req, res) => {
-    const comments = await Comment.findAll({ include: { model: Image } });
+    const comments = Comment.findAll({ where: imageId });
     console.log('+++CMT+++', comments)
     res.json({ comments });
 }));
