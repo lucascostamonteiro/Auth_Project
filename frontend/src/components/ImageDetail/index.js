@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { eraseImage } from "../../store/images";
 import { editDescription } from "../../store/images";
@@ -11,14 +11,17 @@ function ImageDetail({ image, showModal }) {
     const [content, setContent] = useState(image.content);
     const [errors, setErrors] = useState([]);
 
+    useEffect(() => {
+        const validationErrors = [];
+        if (!imageUrl.length) validationErrors.push("Please provide a valid URL");
+        if (imageUrl.length > 0 && !imageUrl.match(/^https?:\/\/.+\/.+$/)) validationErrors.push("Please provide a valid URL");
+        if (!content.length) validationErrors.push("Please provide a description");
+        setErrors(validationErrors);
+    }, [imageUrl, content])
 
-    const handleSubmit = e => {
+    const handleSubmit = (e) => {
         e.preventDefault();
         dispatch(editDescription({ imageUrl, content, id: image.id }))
-            .catch(async (res) => {
-                const data = await res.json();
-                if (data && data.errors) setErrors(data.errors);
-            });
         setEditable(!editable);
     }
 
@@ -42,19 +45,26 @@ function ImageDetail({ image, showModal }) {
             </button>
             {editable && (
                 <form onSubmit={handleSubmit}>
+                    <ul className='errors-list'>
+                        {errors.map((error, idx) => (
+                            <li className='error' key={idx}>{error}</li>
+                        ))}
+                    </ul>
                     <input
                         name='imageUrl'
                         type="text"
                         value={imageUrl}
                         onChange={(e) => setImageUrl(e.target.value)}
+                        required
                     />
                     <input
                         name='content'
                         type="text"
                         value={content}
                         onChange={(e) => setContent(e.target.value)}
+                        required
                     />
-                    <button type="submit">Submit</button>
+                    <button type="submit" >Submit Edit</button>
                 </form>
             )}
             <button onClick={deleteImage}>
