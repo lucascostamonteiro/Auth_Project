@@ -4,14 +4,14 @@ import { addImage } from "../../store/images";
 import { useEffect } from "react";
 import './NewImageForm.css';
 
-function NewImageForm({showModal}) {
+function NewImageForm({ showModal }) {
     const dispatch = useDispatch();
     const [imageUrl, setImageUrl] = useState("");
     const [content, setContent] = useState("");
     const [errors, setErrors] = useState([]);
     const sessionUser = useSelector(state => state.session.user);
 
-    // TODO validate insde handleSubmit so it only shows after 
+    // TODO validate insde handleSubmit so it only shows after
 
     useEffect(() => {
         const validationErrors = [];
@@ -20,6 +20,15 @@ function NewImageForm({showModal}) {
         if (!content.length) validationErrors.push("Please provide a description");
         setErrors(validationErrors);
     }, [imageUrl, content])
+
+    // const validate = () => {
+    //     const validationErrors = [];
+    //     if (!imageUrl.length) validationErrors.push("Please provide a valid URL");
+    //     if (imageUrl.length > 0 && !imageUrl.match(/^https?:\/\/.+\/.+$/)) validationErrors.push("Please provide a valid URL");
+    //     if (!content.length) validationErrors.push("Please provide a description");
+    //     setErrors(validationErrors);
+    // }
+
 
     const handleSubmit = (e) => {
         e.preventDefault();

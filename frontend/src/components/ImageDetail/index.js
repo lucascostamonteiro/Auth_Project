@@ -9,6 +9,7 @@ function ImageDetail({ image, showModal }) {
     const [editable, setEditable] = useState(false);
     const [imageUrl, setImageUrl] = useState(image.imageUrl);
     const [content, setContent] = useState(image.content);
+    const [errors, setErrors] = useState([]);
 
 
     const handleSubmit = e => {
