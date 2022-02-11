@@ -6,6 +6,7 @@ const { Image } = require('../../db/models');
 
 const router = express.Router();
 
+// validations
 const imageValidation = [
     check('imageUrl')
         .exists({ checkFalsy: true })
@@ -27,23 +28,21 @@ router.get('/', asyncHandler(async (req, res) => {
     res.json(images);
 }));
 
-// TODO post image
+// post image
 router.post('/', imageValidation, asyncHandler(async (req, res) => {
     const image = await Image.create(req.body);
     res.json(image);
 }));
 
-// TODO delete image
+// delete image
 router.delete('/', asyncHandler(async (req, res) => {
     const image = await Image.findByPk(req.body.id);
-    // console.log('+++DELETE+++', image);
     await image.destroy();
     return res.json({ message: 'success' });
 }));
 
-//TODO edit content for a specific image
+// edit image
 router.put('/', editValidation, imageValidation, asyncHandler(async (req, res) => {
-    // console.log('+++REQ+++', req.body)
     const image = await Image.findByPk(req.body.id);
     image.set(req.body);
     await image.save();

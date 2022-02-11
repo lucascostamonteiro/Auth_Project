@@ -44,7 +44,6 @@ export const addImage = data => async dispatch => {
         body: JSON.stringify(data)
     });
     if (res.ok) {
-        // const image = await res.json();
         dispatch(createImage(data));
         return;
     } else {
@@ -60,7 +59,6 @@ export const eraseImage = data => async dispatch => {
         body: JSON.stringify(data)
     });
     if (res.ok) {
-        // const image = await res.json();
         dispatch(deleteImage(data));
         return;
     } else {
@@ -84,8 +82,6 @@ export const editDescription = data => async dispatch => {
     };
 };
 
-
-// TODO REDUCER
 
 const initialState = {};
 
@@ -114,7 +110,6 @@ const imageReducer = (state = initialState, action) => {
         }
 
         case EDIT: {
-            console.log('+++DEBUG+++', action.image)
             const newState = { ...state, [action.image.id]: action.image }
             return newState;
         }
