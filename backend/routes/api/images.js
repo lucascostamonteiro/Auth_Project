@@ -17,8 +17,8 @@ const imageValidation = [
 const editValidation = [
     check('content')
         .exists({ checkFalsy: true })
-        .isLength({ min: 4 })
-        .withMessage('Please provide a description with at least 4 characters.'),
+        .isLength({ min: 1 })
+        .withMessage('Please provide a description.'),
 ]
 
 // get images
