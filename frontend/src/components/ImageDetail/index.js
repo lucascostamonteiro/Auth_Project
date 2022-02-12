@@ -37,10 +37,10 @@ function ImageDetail({ image, showModal }) {
 
     return (
         <div className="image-detail-div">
-            <h2 h2 className="single-image-title-detail">{image.content}</h2>
-            {user.id === image.userId &&
+            <h2 className="single-image-title-detail">{image?.content}</h2>
+            {user && user?.id === image?.userId &&
                 <>
-                    <button button onClick={deleteImage}>
+                    <button onClick={deleteImage}>
                         <i className="far fa-trash-alt"></i>
                     </button >
                     <button onClick={() => { setEditable(!editable) }}>
@@ -86,9 +86,9 @@ function ImageDetail({ image, showModal }) {
                 alt={image.content}>
             </img>
             <div className="comments-div">
-                <p>
+                <span>
                     <Comments image={image} />
-                </p>
+                </span>
             </div>
         </div >
     )

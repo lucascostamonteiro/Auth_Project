@@ -22,11 +22,10 @@ function Comments({ image }) {
         e.preventDefault();
         const errors = validate();
         if (errors.length > 0) return setValidationErrors(errors);
-        const data = { userId: user.id, commentData };
+        const data = { userId: user.id, imageId: image.id, commentData };
         console.log('DATA', data)
-        await dispatch(addComment(data))
+        dispatch(addComment(data))
     };
-
 
     useEffect(() => {
         dispatch(getComments(image.id))
@@ -42,6 +41,7 @@ function Comments({ image }) {
             <h3>Comments</h3>
             {comments?.map((comment) => (
                 <span>
+
                     <SingleComment key={comment.id} comment={comment} />
                 </span>
             ))}

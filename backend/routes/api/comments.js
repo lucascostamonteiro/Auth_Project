@@ -26,19 +26,24 @@ router.get('/:imageId', asyncHandler(async (req, res) => {
 
 // TODO post comments
 router.post('/', commentValidation, asyncHandler(async (req, res) => {
-    const { userId, commentData } = req.body;
-    console.log('***COMMENT', req.body)
-    const comment = await Comment.create({ userId, commentData });
-    res.json(comment);
+    const { userId, imageId, commentData } = req.body;
+    const comment = await Comment.create({ userId, imageId, comment: commentData, include: [User] });
+    const newComment = await Comment.findByPk(comment.dataValues.id, { include: [User] })
+    const user = await User.findByPk(userId);
+    comment.dataValues.User = user;
+    const username = user.dataValues.username;
+    console.log('***COMMENT***', newComment)
+    // console.log('+++USER+++', username);
+    res.json({comment, username});
 }))
 
 // TODO edit a comment
-router.put('/', commentValidation, asyncHandler(async (req, res) => {
-    const comment = await Comment.findByPk(req.body.id);
-    comment.set(req.body);
-    await comment.save();
-    res.json(comment);
-}))
+// router.put('/', commentValidation, asyncHandler(async (req, res) => {
+//     const comment = await Comment.findByPk(req.body.id);
+//     comment.set(req.body);
+//     await comment.save();
+//     res.json(comment);
+// }))
 
 // TODO delete a comment
 // router.delete('/', asyncHandler(async (req, res) => {
