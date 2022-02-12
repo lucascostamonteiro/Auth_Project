@@ -15,7 +15,7 @@ const commentValidation = [
         .withMessage('Comments cannot be empty'),
 ]
 
-// TODO get comments for a specific image
+// get comments for a specific image
 router.get('/:imageId', asyncHandler(async (req, res) => {
     const { imageId } = req.params;
     const comments = await Comment.findAll({ where: { imageId }, include: User });
@@ -26,11 +26,18 @@ router.get('/:imageId', asyncHandler(async (req, res) => {
 
 // TODO post comments
 router.post('/', commentValidation, asyncHandler(async (req, res) => {
-
+    const { userId, commentData } = req.body;
+    console.log('***COMMENT', req.body)
+    const comment = await Comment.create({ userId, commentData });
+    res.json(comment);
 }))
+
 // TODO edit a comment
 router.put('/', commentValidation, asyncHandler(async (req, res) => {
-
+    const comment = await Comment.findByPk(req.body.id);
+    comment.set(req.body);
+    await comment.save();
+    res.json(comment);
 }))
 
 // TODO delete a comment
