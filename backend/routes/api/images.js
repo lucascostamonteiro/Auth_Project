@@ -20,6 +20,7 @@ const editValidation = [
         .exists({ checkFalsy: true })
         .isLength({ min: 1 })
         .withMessage('Please provide a description.'),
+    handleValidationErrors
 ]
 
 // get images

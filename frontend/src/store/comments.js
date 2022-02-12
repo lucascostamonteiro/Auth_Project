@@ -26,10 +26,10 @@ const editComment = comment => ({
 });
 
 
-export const getComments = () => async dispatch => {
-    const res = await csrfFetch(`/api/comments`);
+export const getComments = imageId => async dispatch => {
+    const res = await csrfFetch(`/api/comments/${imageId}`);
     if (res.ok) {
-        const comments = await res.json();
+        const comments = await res.json()
         dispatch(loadComments(comments));
     } else {
         const errors = await res.json();
@@ -44,6 +44,7 @@ export const addComment = data => async dispatch => {
         body: JSON.stringify(data)
     });
     if (res.ok) {
+        console.log('DEBUG', data)
         dispatch(createComment(data));
         return;
     } else {
@@ -73,7 +74,6 @@ export const editPictureComment = data => async dispatch => {
         body: JSON.stringify(data)
     });
     if (res.ok) {
-        console.log('DATA', data);
         dispatch(editComment(data));
         return;
     } else {
@@ -88,7 +88,16 @@ const initialState = {};
 
 const commentReducer = (state = initialState, action) => {
     switch (action.type) {
-
+        case LOAD: {
+            const newState = {};
+            action.comments.forEach(comment => {
+                newState[comment.id] = comment;
+            })
+            return newState;
+        }
+        case CREATE:
+            const newState = { [action.comment.id]: action.comment, ...state };
+            return newState;
         default:
             return state;
     }

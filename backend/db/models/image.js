@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
     content: DataTypes.TEXT
   }, {});
   Image.associate = function (models) {
-    // TODO DOUBLE CHECK THIS
+
     Image.belongsTo(models.User, { foreignKey: 'userId' });
     Image.hasMany(models.Comment, { foreignKey: 'imageId' });
   };
