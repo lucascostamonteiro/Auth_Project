@@ -17,7 +17,7 @@ function UserHome() {
     return (
         <ul>
             {images?.map((image) => (
-                <SingleImage key={image.id} image={image} />
+                < SingleImage key={image.id} image={image} />
             ))}
         </ul>
     )

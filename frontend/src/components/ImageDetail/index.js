@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { eraseImage } from "../../store/images";
 import { editDescription } from "../../store/images";
+import Comments from "../Comments";
 import './ImageDetail.css';
 
 function ImageDetail({ image, showModal }) {
@@ -10,6 +11,8 @@ function ImageDetail({ image, showModal }) {
     const [imageUrl, setImageUrl] = useState(image.imageUrl);
     const [content, setContent] = useState(image.content);
     const [errors, setErrors] = useState([]);
+    const user = useSelector(state => state.session.user);
+
 
     useEffect(() => {
         const validationErrors = [];
@@ -31,20 +34,20 @@ function ImageDetail({ image, showModal }) {
         showModal(false);
     };
 
+
     return (
         <div className="image-detail-div">
-            <h2 className="single-image-title-detail">{image.content}</h2>
-            <img
-                className="single-image-detail"
-                key={image.id}
-                src={image.imageUrl}
-                alt={image.content}>
-            </img>
-            <div className="single-image-info-detail">
-
-                <button onClick={() => { setEditable(!editable) }}>
-                    <i className="far fa-edit"></i>
-                </button>
+            <h2 h2 className="single-image-title-detail">{image.content}</h2>
+            {user.id === image.userId &&
+                <>
+                    <button button onClick={deleteImage}>
+                        <i className="far fa-trash-alt"></i>
+                    </button >
+                    <button onClick={() => { setEditable(!editable) }}>
+                        <i className="far fa-edit"></i>
+                    </button>
+                </>}
+            <div>
                 {editable && (
                     <form className="edit-form" onSubmit={handleSubmit}>
                         <ul className='errors-list'>
@@ -68,19 +71,26 @@ function ImageDetail({ image, showModal }) {
                             placeholder="Description"
                             required
                         />
-                        <button className="edit-button" type="submit" >Submit Edit</button>
+                        <button
+                            className="edit-button"
+                            type="submit"
+                            disabled={errors.length > 0}
+                        >Submit Edit</button>
                     </form>
                 )}
-                <button onClick={deleteImage}>
-                    <i className="far fa-trash-alt"></i>
-                </button >
-                <ul>
-                    <li>
-                    // TODO COMMENTS WILL GO HERE
-                    </li>
-                </ul>
             </div>
-        </div>
+            <img
+                className="single-image-detail"
+                key={image.id}
+                src={image.imageUrl}
+                alt={image.content}>
+            </img>
+            <div className="comments-div">
+                <p>
+                    <Comments image={image} />
+                </p>
+            </div>
+        </div >
     )
 }
 

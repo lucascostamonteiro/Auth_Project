@@ -73,7 +73,6 @@ export const editDescription = data => async dispatch => {
         body: JSON.stringify(data)
     });
     if (res.ok) {
-        console.log('DATA', data);
         dispatch(editImage(data));
         return;
     } else {

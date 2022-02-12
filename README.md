@@ -4,7 +4,7 @@
   *  `git clone git@github.com:lucascostamonteiro/Auth_Project.git`
 
 2. Install dependencies from the root directory.
-  *  `npm install`   
+  *  `npm install`
 
 3. Create a POSTGRESQL user with CREATEDB and PASSWORD in PSQL.
   * `CREATE USER <name> WITH CREATEDB PASSWORD <'password'>`
@@ -27,7 +27,7 @@
 9. Start the services for the frontend from the frontend directory. Upon start of services the project should open in your default browser or you can navigate to http://localhost:3000
    * `npm start`
 
-Use the demo user account or create your own account to start using Estadium.
+Use the demo user account or create your own account to start using Estádium.
 
 Technology used in this project:
 
