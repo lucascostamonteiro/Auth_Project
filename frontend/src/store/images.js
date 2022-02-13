@@ -91,9 +91,6 @@ const imageReducer = (state = initialState, action) => {
             action.images.forEach(image => {
                 newState[image.id] = image;
             })
-            // TODO REVERSE
-            // action.images.reverse();
-            // console.log('+++IMAGES+++', action.images)
             return newState;
         }
 

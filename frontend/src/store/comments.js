@@ -44,8 +44,8 @@ export const addComment = data => async dispatch => {
         body: JSON.stringify(data)
     });
     if (res.ok) {
-        console.log('DEBUG', data)
-        dispatch(createComment(data));
+        const newComment = await res.json();
+        dispatch(createComment(newComment));
         return;
     } else {
         const errors = await res.json();
@@ -60,7 +60,8 @@ export const eraseComment = data => async dispatch => {
         body: JSON.stringify(data)
     });
     if (res.ok) {
-        dispatch(deleteComment(data));
+        const comment = await res.json();
+        dispatch(deleteComment(comment));
         return;
     } else {
         const errors = await res.json();
@@ -71,10 +72,12 @@ export const eraseComment = data => async dispatch => {
 export const editPictureComment = data => async dispatch => {
     const res = await csrfFetch(`/api/comments`, {
         method: "PUT",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data)
     });
     if (res.ok) {
-        dispatch(editComment(data));
+        const comment = await res.json();
+        dispatch(editComment(comment));
         return;
     } else {
         const errors = await res.json();
@@ -95,9 +98,19 @@ const commentReducer = (state = initialState, action) => {
             })
             return newState;
         }
-        case CREATE:
+        case CREATE: {
             const newState = { [action.comment.id]: action.comment, ...state };
             return newState;
+        }
+        case EDIT: {
+            const newState = { ...state, [action.comment.id]: action.comment };
+            return newState;
+        }
+        case DELETE: {
+            const newState = { ...state };
+            delete newState[action.comment.id];
+            return newState;
+        }
         default:
             return state;
     }

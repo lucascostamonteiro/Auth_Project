@@ -1,7 +1,6 @@
 const express = require('express');
 const asyncHandler = require('express-async-handler');
 const { check } = require('express-validator');
-const { requireAuth } = require('../../utils/auth')
 const { Comment, User } = require('../../db/models/')
 
 
@@ -23,34 +22,29 @@ router.get('/:imageId', asyncHandler(async (req, res) => {
 }));
 
 
-
 // TODO post comments
 router.post('/', commentValidation, asyncHandler(async (req, res) => {
     const { userId, imageId, commentData } = req.body;
-    const comment = await Comment.create({ userId, imageId, comment: commentData, include: [User] });
-    const newComment = await Comment.findByPk(comment.dataValues.id, { include: [User] })
-    const user = await User.findByPk(userId);
-    comment.dataValues.User = user;
-    const username = user.dataValues.username;
-    console.log('***COMMENT***', newComment)
-    // console.log('+++USER+++', username);
-    res.json({comment, username});
+    const comment = await Comment.create({ userId, imageId, comment: commentData });
+    const newComment = await Comment.findByPk(comment.id, { include: [User] })
+    res.json(newComment);
 }))
 
 // TODO edit a comment
-// router.put('/', commentValidation, asyncHandler(async (req, res) => {
-//     const comment = await Comment.findByPk(req.body.id);
-//     comment.set(req.body);
-//     await comment.save();
-//     res.json(comment);
-// }))
+router.put('/', commentValidation, asyncHandler(async (req, res) => {
+    const { id, userId, imageId, comment } = req.body;
+    await Comment.update({ userId, imageId, comment }, { where: { id } });
+    const newComment = await Comment.findByPk(id, { include: [User] });
+    res.json(newComment);
+}))
 
 // TODO delete a comment
-// router.delete('/', asyncHandler(async (req, res) => {
-//     const comment = await Comment.findByPk(req.body.id);
-//     console.log('COMMENT', comment);
-//     await comment.destroy();
-//     return res.json({ message: 'success' });
-// }));
+router.delete('/', asyncHandler(async (req, res) => {
+    console.log('REQ', req.body.id);
+    const comment = await Comment.findByPk(req.body.id);
+    await comment.destroy();
+    console.log('***,COMMENT', comment);
+    return res.json(comment);
+}));
 
 module.exports = router;
