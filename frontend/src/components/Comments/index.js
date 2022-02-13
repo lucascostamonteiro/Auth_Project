@@ -24,6 +24,7 @@ function Comments({ image }) {
         if (errors.length > 0) return setValidationErrors(errors);
         const data = { userId: user.id, imageId: image.id, commentData };
         dispatch(addComment(data))
+        setCommentData('')
     };
 
     useEffect(() => {
