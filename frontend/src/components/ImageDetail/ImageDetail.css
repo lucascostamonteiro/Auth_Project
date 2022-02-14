@@ -15,7 +15,7 @@
 .single-image-title-detail {
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
-
+/* 
 .edit-form {
   display: flex;
   flex-direction: column;
@@ -24,7 +24,7 @@
   padding: 1.5px 3.5px 12.5px 3.5px;
   margin: 15px 40px;
   border-radius: 4px;
-}
+} */
 
 .edit-button {
   justify-content: center;

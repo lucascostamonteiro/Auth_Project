@@ -49,10 +49,10 @@ function ImageDetail({ image, showModal }) {
             </div>
             {user && user?.id === image?.userId &&
                 <>
-                    <button onClick={deleteImage}>
+                    <button className="delete-button-image" onClick={deleteImage}>
                         <i className="far fa-trash-alt"></i>
                     </button >
-                    <button onClick={() => { setEditable(!editable) }}>
+                    <button className="edit-button-image" onClick={() => { setEditable(!editable) }}>
                         <i className="far fa-edit"></i>
                     </button>
                 </>}

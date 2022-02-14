@@ -13,7 +13,7 @@
   height: auto;
 }
 
-.image-detail-div {
+/* .image-detail-div {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -27,10 +27,10 @@
   max-height: 160vh;
   padding: 30px;
   /* top: -223px; */
-  /* bottom: 100px; */
-  /* right: -310px; */
-  /* padding-top: 100px; */
-}
+/* bottom: 100px; */
+/* right: -310px; */
+/* padding-top: 100px; */
+/* } */
 
 .single-image-detail {
   max-width: 50vw;
@@ -51,7 +51,7 @@
   align-items: center;
   border: 0.5px solid black;
   padding: 1.5px 3.5px 12.5px 3.5px;
-  margin: 15px 40px;
+  margin: 15px 210px;
   border-radius: 10px;
 }
 
@@ -197,4 +197,45 @@
   max-width: 90%;
   overflow-y: scroll;
   overflow-x: hidden;
+}
+
+.delete-button-image {
+  text-align: center;
+  border: 1px solid rgb(151, 147, 161);
+  border-radius: 2px;
+  margin-top: 6px;
+  padding: 5px;
+  width: 30px;
+  margin-left: 5px;
+}
+
+.edit-button-image {
+  text-align: center;
+  border: 1px solid rgb(151, 147, 161);
+  border-radius: 2px;
+  margin-top: 6px;
+  padding: 5px;
+  width: 30px;
+  margin-left: 5px;
+}
+
+.delete-button-image:hover {
+  background: rgb(151, 147, 161);
+  transition: all;
+  color: white;
+}
+
+.edit-button-image:hover {
+  background: rgb(151, 147, 161);
+  transition: all;
+  color: white;
+}
+
+
+.form-comment{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-top: 20px;
+
 }
