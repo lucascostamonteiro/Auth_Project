@@ -33,17 +33,19 @@ function Comments({ image }) {
 
     return (
         <div className="comments-div">
-            <div>
+            <div className="errors-list">
                 <ul>
                     {validationErrors.map(error => <li key={error}>{error}</li>)}
                 </ul>
             </div>
             <h3 className="comments-title">Comments</h3>
-            {comments?.map((comment) => (
-                <span className='single-comment-row'>
-                    <SingleComment key={comment.id} comment={comment} />
-                </span>
-            ))}
+            <div className="comment-box">
+                {comments?.map((comment) => (
+                    <span className='single-comment-row'>
+                        <SingleComment key={comment.id} comment={comment} />
+                    </span>
+                ))}
+            </div>
             <form className="form-comment">
                 <textarea
                     name="new-comment"

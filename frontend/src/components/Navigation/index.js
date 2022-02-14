@@ -29,12 +29,12 @@ function Navigation({ isLoaded }) {
     return (
         <>
             <div className='main-navbar'>
-                <span className='left-navbar'>
-                    <NavLink exact to="/">Estádium</NavLink>
-                </span>
-                <span className='right-navbar'>
+                <div className='left-navbar'>
+                    <NavLink exact to="/"> <div className='home-button'>Estádium</div></NavLink>
+                </div>
+                <div className='right-navbar'>
                     {isLoaded && sessionLinks}
-                </span>
+                </div>
             </div>
         </>
     );

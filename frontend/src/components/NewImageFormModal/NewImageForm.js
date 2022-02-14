@@ -42,7 +42,7 @@ function NewImageForm({ showModal }) {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form className="new-image-form" onSubmit={handleSubmit}>
             <ul className='errors-list'>
                 {errors.map((error, idx) => (
                     <li className='error' key={idx}>{error}</li>

@@ -1,0 +1,47 @@
+body {
+  margin: 0;
+  width: 100%;
+}
+
+.landing-page-titles {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  z-index: 10;
+}
+
+.landing-picture {
+  position: fixed;
+  display: flex;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+}
+
+.landing-page-main {
+  background-image: url(https://getwallpapers.com/wallpaper/full/6/3/1/271920.jpg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.landing-page-titles {
+  display: flex;
+  flex-direction: column;
+  color: white;
+}
+.landing-page-titles h1 {
+  font-size: 56px;
+  line-height: 56px;
+  font-weight: 600;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.landing-page-main h3 {
+  margin-bottom: 50px;
+  font-size: 26px;
+  line-height: 32px;
+  font-weight: 600;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}

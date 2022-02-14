@@ -36,8 +36,17 @@ function ImageDetail({ image, showModal }) {
 
 
     return (
-        <div className="image-detail-div">
-            <h2 className="single-image-title-detail">{image?.content}</h2>
+        <div className="modal-content-image">
+            <div>
+                <h2 className="single-image-title-detail">{image?.content}</h2>
+
+                <img
+                    className="single-image-detail"
+                    key={image.id}
+                    src={image.imageUrl}
+                    alt={image.content}>
+                </img>
+            </div>
             {user && user?.id === image?.userId &&
                 <>
                     <button onClick={deleteImage}>
@@ -79,12 +88,6 @@ function ImageDetail({ image, showModal }) {
                     </form>
                 )}
             </div>
-            <img
-                className="single-image-detail"
-                key={image.id}
-                src={image.imageUrl}
-                alt={image.content}>
-            </img>
             <div className="comments-div">
                 <span>
                     <Comments image={image} />

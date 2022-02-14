@@ -18,8 +18,18 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border-radius: 20px;
-  overflow: hidden;
+  border-radius: 5px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  position: relative;
+  background-color: white;
+  max-width: 150vw;
+  max-height: 160vh;
+  padding: 30px;
+  /* top: -223px; */
+  /* bottom: 100px; */
+  /* right: -310px; */
+  /* padding-top: 100px; */
 }
 
 .single-image-detail {
@@ -93,6 +103,8 @@
   padding: 5px;
   width: 100px;
   margin-left: 5px;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-weight: bold;
 }
 
 #new-image-form:hover {
@@ -109,4 +121,80 @@
   padding: 5px;
   width: 30px;
   margin-left: 5px;
+}
+
+.profile-icon-button:hover {
+  background: rgb(151, 147, 161);
+  transition: all;
+  color: white;
+}
+
+/* .main-navbar {
+  background-color: rgb(164, 164, 168);
+  box-shadow: 0px 10px 15px -8px rgb(196, 185, 185);
+  height: 85px;
+  width: 100%;
+  margin: auto;
+  position: fixed;
+  top: 0;
+  z-index: 1;
+}
+
+.left-navbar {
+  width: 500px;
+  float: left;
+  margin-left: 30px;
+}
+
+.right-navbar {
+  width: 300px;
+  float: right;
+  margin: 10px;
+} */
+
+.home-button {
+  text-align: center;
+  background-color: white;
+  border-radius: 2px;
+  margin-top: 6px;
+  padding: 6px;
+  width: 70px;
+  margin-left: 5px;
+  font-weight: bold;
+}
+
+.active {
+  text-decoration: none;
+  color: black;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+.home-button:hover {
+  background: rgb(134, 130, 146);
+  transition: all;
+  color: white;
+}
+
+.landing-page-div {
+  display: grid;
+  flex-direction: column;
+}
+
+.new-image-form {
+  position: relative;
+}
+
+.errors-list {
+  color: red;
+  font-weight: bold;
+}
+
+.comment-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  max-height: 25vh;
+  max-width: 90%;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }

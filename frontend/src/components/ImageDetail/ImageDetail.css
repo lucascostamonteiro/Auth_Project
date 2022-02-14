@@ -1,7 +1,8 @@
-.image-detail-div {
+/* .image-detail-div {
   overflow-y: scroll;
-  /* top: 2em; */
-}
+  position: relative;
+  width: fit-content;
+} */
 
 .single-image-detail {
   max-width: 50vw;
