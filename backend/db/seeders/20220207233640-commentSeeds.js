@@ -11,7 +11,12 @@ module.exports = {
     return queryInterface.bulkInsert('Comments', [
       { userId: 1, imageId: 1, comment: "just beautiful!", createdAt: new Date(), updatedAt: new Date() },
       { userId: 1, imageId: 1, comment: "fantastic atmosphere!", createdAt: new Date(), updatedAt: new Date() },
-      { userId: 1, imageId: 1, comment: "can't wait to go back for Libertadores!", createdAt: new Date(), updatedAt: new Date() },
+      { userId: 1, imageId: 2, comment: "can't wait to go back for Libertadores!", createdAt: new Date(), updatedAt: new Date() },
+      { userId: 1, imageId: 2, comment: "just beautiful!", createdAt: new Date(), updatedAt: new Date() },
+      { userId: 1, imageId: 3, comment: "fantastic atmosphere!", createdAt: new Date(), updatedAt: new Date() },
+      { userId: 1, imageId: 3, comment: "beautiful!", createdAt: new Date(), updatedAt: new Date() },
+      { userId: 1, imageId: 4, comment: "cool!", createdAt: new Date(), updatedAt: new Date() },
+      { userId: 1, imageId: 4, comment: "awesome!", createdAt: new Date(), updatedAt: new Date() },
     ], {});
   },
 
