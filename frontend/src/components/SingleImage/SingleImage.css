@@ -9,4 +9,16 @@
 .single-image {
   max-width: 50%;
   height: auto;
+  border-radius: 5px;
+  box-shadow: 5px 5px 15px 5px rgb(141, 132, 132);
+  cursor: zoom-in;
+  transform: scale(1.03);
+}
+
+.single-image:hover {
+  box-shadow: 5px 5px 15px 5px #425879;
+}
+
+.image-title{
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }

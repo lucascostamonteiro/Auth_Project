@@ -1,4 +1,9 @@
-.comments-div{
-    display: flex;
-    flex-direction: column;
+.comments-div {
+  display: flex;
+  flex-direction: column;
+}
+
+.comments-title {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  text-decoration: underline;
 }

@@ -13,7 +13,7 @@ input, label {
 
 input {
   margin: 12px;
-  border: 1px solid rgb(60, 18, 160);
+  border: 1px solid rgb(151, 147, 161);
   border-radius: 5px;
   width: 200px;
   height: 20px;
@@ -21,7 +21,7 @@ input {
 
 .signup-button {
   text-align: center;
-  border: 1px solid rgb(60, 18, 160);
+  border: 1px solid rgb(151, 147, 161);
   border-radius: 5px;
   margin-top: 10px;
   padding: 7px;
@@ -29,14 +29,14 @@ input {
 }
 
 .signup-button:hover, #signup:hover{
-  background: rgb(60, 18, 160);
+  background: rgb(151, 147, 161);
   transition: all;
   color: white;
 }
 
 input:focus {
-  outline: 1px solid rgb(60, 18, 160);
-  border: 1px solid rgb(60, 18, 160);
+  outline: 1px solid rgb(151, 147, 161);
+  border: 1px solid rgb(151, 147, 161);
 }
 
 .errors-list{

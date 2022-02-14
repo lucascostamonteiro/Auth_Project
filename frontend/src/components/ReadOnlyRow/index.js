@@ -14,15 +14,17 @@ const ReadOnlyRow = ({ comment, handleEditClick }) => {
 
     return (
         <>
-            <tr>
+            <tr >
                 <td>
                     <button
+                        className="read-only-button"
                         type="button"
                         onClick={(e) => handleEditClick(e, user)}
                     >
                         Edit
                     </button>
                     <button
+                        className="delete-cmt-button"
                         type="button"
                         onClick={handleDeleteClick}
                     >

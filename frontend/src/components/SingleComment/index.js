@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import ReadOnlyRow from '../ReadOnlyRow';
 import EditableRow from '../EditableRow';
+import './SingleComment.css'
 
 
 const SingleComment = ({ comment }) => {
@@ -22,8 +23,7 @@ const SingleComment = ({ comment }) => {
 
     return (
         <>
-            <span>{username}: {comment.comment}</span>
-            <>
+            <span className='span-comment'>{username}: {comment.comment}</span>
                 {editCommentId === user.id ? (
                     <EditableRow
                         comment={comment}
@@ -35,7 +35,6 @@ const SingleComment = ({ comment }) => {
                         handleEditClick={handleEditClick}
                     />}
 
-            </>
         </>
     )
 }

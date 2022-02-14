@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from 'react';
 import { useDispatch } from "react-redux";
 import { editPictureComment } from '../../store/comments';
+import './EditableRow.css'
 
 const EditableRow = ({ comment, handleDoneClick }) => {
     const dispatch = useDispatch();
@@ -34,13 +35,15 @@ const EditableRow = ({ comment, handleDoneClick }) => {
                             >
                             </input>
                         </td>
-                        <td>
+                        <td >
                             <button
+                                className="submit-edit-cmt-button"
                                 type="submit"
                             >
                                 Submit
                             </button>
                             <button
+                                className="done-edit-button"
                                 type="button"
                                 onClick={handleDoneClick}>
                                 Done

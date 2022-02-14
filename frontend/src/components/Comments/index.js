@@ -38,9 +38,9 @@ function Comments({ image }) {
                     {validationErrors.map(error => <li key={error}>{error}</li>)}
                 </ul>
             </div>
-            <h3>Comments</h3>
+            <h3 className="comments-title">Comments</h3>
             {comments?.map((comment) => (
-                <span>
+                <span className='single-comment-row'>
                     <SingleComment key={comment.id} comment={comment} />
                 </span>
             ))}
