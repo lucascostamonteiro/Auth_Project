@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Modal } from '../../context/Modal';
+import { ModalImage } from '../../context/ImageModal';
 import ImageDetail from '../ImageDetail';
 import './SingleImage.css'
 
@@ -19,9 +19,9 @@ const SingleImage = ({ image }) => {
             >
             </img>
             {showModal && (
-                <Modal onClose={() => setShowModal(false)}>
+                <ModalImage onClose={() => setShowModal(false)}>
                     <ImageDetail image={image} description={image.content} showModal={setShowModal} />
-                </Modal>
+                </ModalImage>
             )}
         </div>
     )
