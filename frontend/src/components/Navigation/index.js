@@ -25,7 +25,7 @@ function Navigation({ isLoaded }) {
                 <SignupFormModal />
             </>
         );
-    // }
+    }
     return (
         <>
             <div className='main-navbar'>
@@ -38,6 +38,7 @@ function Navigation({ isLoaded }) {
             </div>
         </>
     );
+
 }
 
 export default Navigation;
