@@ -6,7 +6,6 @@ const { Comment, User } = require('../../db/models/')
 
 const router = express.Router();
 
-// TODO VALIDATION MIDDLEWARE
 const commentValidation = [
     check('comment')
         .exists({ checkFalsy: true })
@@ -22,7 +21,7 @@ router.get('/:imageId', asyncHandler(async (req, res) => {
 }));
 
 
-// TODO post comments
+
 router.post('/', commentValidation, asyncHandler(async (req, res) => {
     const { userId, imageId, commentData } = req.body;
     const comment = await Comment.create({ userId, imageId, comment: commentData });
@@ -30,7 +29,7 @@ router.post('/', commentValidation, asyncHandler(async (req, res) => {
     res.json(newComment);
 }))
 
-// TODO edit a comment
+
 router.put('/', commentValidation, asyncHandler(async (req, res) => {
     const { id, userId, imageId, comment } = req.body;
     await Comment.update({ userId, imageId, comment }, { where: { id } });
@@ -38,12 +37,10 @@ router.put('/', commentValidation, asyncHandler(async (req, res) => {
     res.json(newComment);
 }))
 
-// TODO delete a comment
 router.delete('/', asyncHandler(async (req, res) => {
     console.log('REQ', req.body.id);
     const comment = await Comment.findByPk(req.body.id);
     await comment.destroy();
-    console.log('***,COMMENT', comment);
     return res.json(comment);
 }));
 

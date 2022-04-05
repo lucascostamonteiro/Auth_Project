@@ -25,7 +25,7 @@ function Navigation({ isLoaded }) {
                 <SignupFormModal />
             </>
         );
-    }
+    // }
     return (
         <>
             <div className='main-navbar'>
