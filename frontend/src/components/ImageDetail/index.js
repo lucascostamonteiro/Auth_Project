@@ -13,6 +13,7 @@ function ImageDetail({ image, showModal }) {
     const [errors, setErrors] = useState([]);
     const user = useSelector(state => state.session.user);
 
+    console.log('***', image)
 
     useEffect(() => {
         const validationErrors = [];
@@ -24,7 +25,7 @@ function ImageDetail({ image, showModal }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        dispatch(editDescription({ imageUrl, content, id: image.id }))
+        dispatch(editDescription({ imageUrl, content, id: image.id, userId: user.id }))
         setEditable(!editable);
     }
 
@@ -47,15 +48,16 @@ function ImageDetail({ image, showModal }) {
                     alt={image.content}>
                 </img>
             </div>
-            {user && user?.id === image?.userId &&
+            {user && (user?.id === image?.userId) &&
                 <>
                     <button className="delete-button-image" onClick={deleteImage}>
                         <i className="far fa-trash-alt"></i>
                     </button >
-                    <button className="edit-button-image" onClick={() => { setEditable(!editable) }}>
+                    <button className="edit-button-image" onClick={() => {setEditable(!editable) }}>
                         <i className="far fa-edit"></i>
                     </button>
-                </>}
+                </>
+            }
             <div>
                 {editable && (
                     <form className="edit-form" onSubmit={handleSubmit}>
