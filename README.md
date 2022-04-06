@@ -1,4 +1,24 @@
-# Estádium
+# Welcome to Estadium!
+
+## Overview
+[Estadium](https://estadium.herokuapp.com/), Inspired by Flickr, a photo sharing app where soccer fans post and comment on soccer related experiences.
+
+![estadium](https://user-images.githubusercontent.com/79651942/161883512-0f0367ef-36a6-4de0-a509-1262cd68ae05.png)
+
+## Architecture
+Estadium is built on a React frontend with a Express backend, using PostgreSQL as a database.
+
+## Technologies Used
+* React
+* Redux
+* Javascript
+* HTML
+* CSS
+* Express
+* Sequelize
+* PostgreSQL
+
+## Estadium Setup
 
 1. Clone the repo
   *  `git clone git@github.com:lucascostamonteiro/Auth_Project.git`
@@ -29,13 +49,3 @@
 
 Use the demo user account or create your own account to start using Estádium.
 
-Technology used in this project:
-
-* React
-* Redux
-* Javascript
-* HTML
-* CSS
-* Express
-* Sequelize
-* PostgreSQL
