@@ -21,7 +21,7 @@ Estadium is built on a React frontend with a Express backend, using PostgreSQL a
 ## Estadium Setup
 
 1. Clone the repo
-  *  `git clone git@github.com:lucascostamonteiro/Auth_Project.git`
+  *  `git clone https://github.com/lucascostamonteiro/Estadium`
 
 2. Install dependencies from the root directory.
   *  `npm install`
