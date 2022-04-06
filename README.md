@@ -6,7 +6,7 @@
 ![estadium](https://user-images.githubusercontent.com/79651942/161883512-0f0367ef-36a6-4de0-a509-1262cd68ae05.png)
 
 ## Architecture
-Estadium is built on a React frontend with a Express backend, using PostgreSQL as a database.
+Estadium is built on a React frontend with an Express backend, using PostgreSQL as a database.
 
 ## Technologies Used
 * React
