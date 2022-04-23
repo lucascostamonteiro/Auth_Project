@@ -22,35 +22,37 @@ function LoginForm() {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <ul className='errors-list'>
-                {errors.map((error, idx) => (
-                    <li key={idx}>{error}</li>
-                ))}
-            </ul>
-            <div className="input-div">
-                <label>
-                    <input
-                        type="text"
-                        value={credential}
-                        onChange={(e) => setCredential(e.target.value)}
-                        placeholder='Username or Email'
-                        required
-                    />
-                </label>
-                <label>
-                    <input
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        placeholder='Password'
-                        required
-                    />
-                </label>
+        <form className='main-user-login' onSubmit={handleSubmit}>
+            <div className="errors-list-login ">
+                <ul className='single-error'>
+                    {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+                </ul>
+            </div>
+            <div>
+                <label className='email-label' htmlFor='email'>Email </label>
+                <input
+                    className='login-inputs'
+                    type="text"
+                    value={credential}
+                    onChange={(e) => setCredential(e.target.value)}
+                    required
+                />
+            </div>
+            <div>
+                <label htmlFor='password'>Password </label>
+                <input
+                    className='login-inputs'
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                />
+            </div>
+            <div className="buttons-login-div">
                 <button className='login-button' type="submit">Log In</button>
                 <Demo />
             </div>
-        </form>
+        </form >
     );
 }
 
