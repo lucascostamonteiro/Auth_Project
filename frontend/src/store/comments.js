@@ -85,7 +85,6 @@ export const editPictureComment = data => async dispatch => {
     };
 };
 
-// TODO REDUCER
 
 const initialState = {};
 

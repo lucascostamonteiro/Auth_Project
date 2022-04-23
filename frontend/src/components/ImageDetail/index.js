@@ -13,12 +13,15 @@ function ImageDetail({ image, showModal }) {
     const [errors, setErrors] = useState([]);
     const user = useSelector(state => state.session.user);
 
-    console.log('***', image)
+    const fileSelected = event => {
+        const file = event.target.files[0]
+        setImageUrl(file)
+    }
 
     useEffect(() => {
         const validationErrors = [];
-        if (!imageUrl.length) validationErrors.push("Please provide a valid URL");
-        if (imageUrl.length > 0 && !imageUrl.match(/^https?:\/\/.+\/.+$/)) validationErrors.push("Please provide a valid URL");
+        // if (!imageUrl.length) validationErrors.push("Please provide a valid URL");
+        // if (imageUrl.length > 0 && !imageUrl.match(/^https?:\/\/.+\/.+$/)) validationErrors.push("Please provide a valid URL");
         if (!content.length) validationErrors.push("Please provide a description");
         setErrors(validationErrors);
     }, [imageUrl, content])
@@ -35,6 +38,9 @@ function ImageDetail({ image, showModal }) {
         showModal(false);
     };
 
+    const handleImgError = (e) => {
+        e.target.src = '../../../../static/not-image.png';
+    }
 
     return (
         <div className="modal-content-image">
@@ -45,7 +51,8 @@ function ImageDetail({ image, showModal }) {
                     className="single-image-detail"
                     key={image.id}
                     src={image.imageUrl}
-                    alt={image.content}>
+                    alt={image.content}
+                    onError={handleImgError}>
                 </img>
             </div>
             {user && (user?.id === image?.userId) &&
@@ -66,26 +73,27 @@ function ImageDetail({ image, showModal }) {
                                 <li className='error' key={idx}>{error}</li>
                             ))}
                         </ul>
-                        <input
+                        {/* <input
                             name='imageUrl'
                             type="text"
                             value={imageUrl}
                             onChange={(e) => setImageUrl(e.target.value)}
                             placeholder="Image URL"
                             required
-                        />
+                        /> */}
+                        <label htmlFor="Description">Description</label>
                         <input
                             name='content'
                             type="text"
                             value={content}
                             onChange={(e) => setContent(e.target.value)}
-                            placeholder="Description"
+                            placeholder="Enter a new description..."
                             required
                         />
                         <button
                             className="edit-button"
                             type="submit"
-                            disabled={errors.length > 0}
+                            // disabled={errors.length > 0}
                         >Submit Edit</button>
                     </form>
                 )}

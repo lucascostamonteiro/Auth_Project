@@ -13,8 +13,8 @@ function Navigation({ isLoaded }) {
     if (sessionUser) {
         sessionLinks = (
             <>
-                <ProfileButton user={sessionUser} />
                 <NewImageFormModal />
+                <ProfileButton user={sessionUser} />
             </>
 
         );

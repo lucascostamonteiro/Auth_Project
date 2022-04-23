@@ -4,6 +4,9 @@ const LOAD = 'images/LOAD';
 const CREATE = 'images/CREATE';
 const DELETE = 'images/DELETE';
 const EDIT = 'images/EDIT'
+const FAVORITE = 'images/FAVORITE';
+const UNFAVORITE = 'images/UNFAVORITE'
+const LOAD_FAVORITES = 'favorites/LOAD_FAVORITES';
 
 const loadImages = images => ({
     type: LOAD,
@@ -25,6 +28,29 @@ const editImage = image => ({
     image
 });
 
+const favorite = (image, userId) => {
+    return {
+        type: FAVORITE,
+        image,
+        userId
+    }
+}
+
+const unfavorite = (image, userId) => {
+    return {
+        type: UNFAVORITE,
+        image,
+        userId
+    }
+}
+
+const loadFavorites = (favoriteImages) => {
+    return {
+        type: LOAD_FAVORITES,
+        favoriteImages
+    }
+}
+
 
 export const getImages = () => async dispatch => {
     const res = await csrfFetch(`/api/images`);
@@ -38,13 +64,15 @@ export const getImages = () => async dispatch => {
 };
 
 
-export const addImage = data => async dispatch => {
+export const addImage = formData => async dispatch => {
     const res = await csrfFetch(`/api/images`, {
         method: "POST",
-        body: JSON.stringify(data)
+        headers: { "Content-Type": "multipart/form-data" },
+        body: formData
     });
     if (res.ok) {
-        dispatch(createImage(data));
+        const image = await res.json();
+        dispatch(createImage(image));
         return;
     } else {
         const errors = await res.json();
@@ -81,8 +109,48 @@ export const editDescription = data => async dispatch => {
     };
 };
 
+export const addFavorites = (data) => async (dispatch) => {
+    const response = await csrfFetch(`/api/images/`, {
+        method: 'POST',
+        body: JSON.stringify(data)
+    })
 
-const initialState = {};
+    if (response.ok) {
+        return;
+    } else {
+        const errors = await response.json();
+        console.log(errors.errors);
+    }
+};
+
+export const deleteFavorites = (data) => async (dispatch) => {
+    const response = await csrfFetch(`/api/images/`, {
+        method: 'DELETE',
+        body: JSON.stringify(data)
+    })
+
+    if (response.ok) {
+        return;
+    } else {
+        const errors = await response.json();
+        console.log(errors.errors);
+    }
+};
+
+export const getFavoriteImages = (id) => async (dispatch) => {
+    const response = await csrfFetch(`/api/favorites/`)
+
+    if (response.ok) {
+        const favorites = await response.json();
+        dispatch(loadFavorites(favorites));
+    } else {
+        const errors = await response.json();
+        console.log(errors.errors);
+    }
+}
+
+
+const initialState = { favoritesPage: {} };
 
 const imageReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -94,9 +162,35 @@ const imageReducer = (state = initialState, action) => {
             return newState;
         }
 
+        case LOAD_FAVORITES: {
+            const allFavorites = {};
+            action.favoriteImages.forEach((image) => {
+                allFavorites[image.id] = image;
+            })
+            const newState = { ...state, favoritesPage: { ...allFavorites } }
+            return newState;
+        }
+        // TODO CASE for favorites
+
+        // case FAVORITE: {
+        //     const newState = {
+        //         ...state, [action.image.id]: {
+        //             ...state[action.image.id], Favorites: [...state[action.image.id].Favorites, { userId: action.userId, imageId: action.image.id }
+        //             ]
+        //         }
+        //     };
+        //     return newState;
+        // }
+
+        // case UNFAVORITE: {
+        //     const newState = {
+        //         ...state, [action.imageId]: { ...state[action.image.id], Favorites: [...state[action.image.id].Favorites] }
+        //     }
+        //     return newState;
+        // }
+
         case CREATE: {
-            const newState = { [action.image.id]: action.image, ...state };
-            return newState
+            return { [action.image.id]: action.image, ...state };
         }
 
         case DELETE: {

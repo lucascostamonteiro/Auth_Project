@@ -11,12 +11,12 @@ function NewImageForm({ showModal }) {
     const [errors, setErrors] = useState([]);
     const sessionUser = useSelector(state => state.session.user);
 
-    // TODO validate insde handleSubmit so it only shows after
+    // TODO validate inside handleSubmit so it only shows after
 
     useEffect(() => {
         const validationErrors = [];
-        if (!imageUrl.length) validationErrors.push("Please provide a valid URL");
-        if (imageUrl.length > 0 && !imageUrl.match(/^https?:\/\/.+\/.+$/)) validationErrors.push("Please provide a valid URL");
+        if (!imageUrl.length) validationErrors.push("Please provide an image with a valid file extension (.jpg, .jpeg, .gif, .png, .tiff)");
+        // if (imageUrl.length > 0 && !imageUrl.match(/^https?:\/\/.+\/.+$/)) validationErrors.push("Please provide a valid URL");
         if (!content.length) validationErrors.push("Please provide a description");
         setErrors(validationErrors);
     }, [imageUrl, content])
@@ -29,16 +29,29 @@ function NewImageForm({ showModal }) {
     //     setErrors(validationErrors);
     // }
 
-
     const handleSubmit = (e) => {
         e.preventDefault();
-        const data = {
-            userId: sessionUser.id,
-            imageUrl,
-            content
-        };
-        dispatch(addImage(data));
-        showModal(false);
+        const formData = new FormData();
+        formData.append("userId", sessionUser?.id)
+        formData.append("image", imageUrl)
+        formData.append("content", content)
+
+        // const data = {
+        //     userId: sessionUser.id,
+        //     imageUrl,
+        //     content
+        // };
+        dispatch(addImage(formData));
+        if (formData.errors) {
+            setErrors(formData.errors)
+        } else if (formData) {
+            showModal(false);
+        }
+    }
+
+    const fileSelected = event => {
+        const file = event.target.files[0]
+        setImageUrl(file)
     }
 
     return (
@@ -49,12 +62,18 @@ function NewImageForm({ showModal }) {
                 ))}
             </ul>
             <div className="input-div">
-                <input
+                {/* <input
                     type="imageUrl"
                     value={imageUrl}
                     onChange={(e) => setImageUrl(e.target.value)}
                     placeholder='Image Url'
                     required
+                /> */}
+                <input
+                    onChange={fileSelected}
+                    type="file"
+                    // accept="image/*"
+                    accept=".jpg, .jpeg, .gif, .png, .tiff"
                 />
                 <input
                     type="description"
