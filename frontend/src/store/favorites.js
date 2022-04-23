@@ -29,41 +29,41 @@ const loadFavorites = (images) => {
 
 
 export const addFavorites = (data) => async (dispatch) => {
-  const response = await csrfFetch(`/api/images/`, {
+  const res = await csrfFetch(`/api/favorites/`, {
     method: 'POST',
     body: JSON.stringify(data)
   })
-
-  if (response.ok) {
-    return;
+  if (res.ok) {
+    const favoritedImage = await res.json();
+    dispatch(favorite(favoritedImage));
   } else {
-    const errors = await response.json();
+    const errors = await res.json();
     console.log(errors.errors);
   }
 };
 
 export const deleteFavorites = (data) => async (dispatch) => {
-  const response = await csrfFetch(`/api/images/`, {
+  const res = await csrfFetch(`/api/favorites/`, {
     method: 'DELETE',
     body: JSON.stringify(data)
   })
 
-  if (response.ok) {
-    return;
+  if (res.ok) {
+    const unFavoritedImage = await res.json();
+    dispatch(unfavorite(unFavoritedImage));
   } else {
-    const errors = await response.json();
+    const errors = await res.json();
     console.log(errors.errors);
   }
 };
 
 export const loadFavoriteImages = (id) => async (dispatch) => {
-  const response = await csrfFetch(`/api/favorites/`)
-
-  if (response.ok) {
-    const favorites = await response.json();
+  const res = await csrfFetch(`/api/favorites/`)
+  if (res.ok) {
+    const favorites = await res.json();
     dispatch(loadFavorites(favorites));
   } else {
-    const errors = await response.json();
+    const errors = await res.json();
     console.log(errors.errors);
   }
 }

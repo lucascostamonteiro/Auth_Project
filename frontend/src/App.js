@@ -4,6 +4,7 @@ import { Route, Switch } from "react-router-dom";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import MainPage from "./components/MainPage";
+import MyFavorites from "./components/MyFavorites";
 
 function App() {
   const dispatch = useDispatch();
@@ -17,10 +18,16 @@ function App() {
 
       {isLoaded && (
         <Switch>
-          <Route exact path='/'>
-          <Navigation isLoaded={isLoaded} />
+          <Route path='/' exact={true}>
+            <Navigation isLoaded={isLoaded} />
             <MainPage />
           </Route>
+          <Route path='/my-favorites' exact={true}>
+            <MyFavorites />
+          </Route>
+          {/* <Route path='/search/:searchQuery'>
+            <Search />
+          </Route> */}
           <Route>
             <h1>Page Not Found</h1>
           </Route>
