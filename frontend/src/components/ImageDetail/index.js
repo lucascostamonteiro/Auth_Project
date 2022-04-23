@@ -41,6 +41,7 @@ function ImageDetail({ image, showModal }) {
         e.preventDefault();
         dispatch(eraseImage(image));
         showModal(false);
+        showModal(false);
     };
 
     const handleImgError = (e) => {
@@ -55,8 +56,18 @@ function ImageDetail({ image, showModal }) {
             imageId: image.id
         }
         // console.log('IMAGE', data);
-        if (!favoriteVal) await dispatch(addFavorites(data))
-        else if (favoriteVal) await dispatch(deleteFavorites(data))
+        await dispatch(addFavorites(data))
+        setFavoriteVal(!favoriteVal)
+    };
+
+    const handleUnfavorites = async (e) => {
+        e.preventDefault();
+        const data = {
+            userId: user.id,
+            imageId: image.id
+        }
+        // console.log('IMAGE', data);
+        await dispatch(deleteFavorites(data))
         setFavoriteVal(!favoriteVal)
     };
 
