@@ -43,13 +43,12 @@ router.get('/', asyncHandler(async (req, res) => {
 
 // AWS S3 ROUTE
 router.post('/', singleMulterUpload("image"), asyncHandler(async (req, res) => {
-    const { userId, content, location } = req.body;
+    const { userId, content } = req.body;
     const postImageUrl = await singlePublicFileUpload(req.file);
     const newImage = await Image.create({
         userId,
         content,
         imageUrl: postImageUrl,
-        location,
     });
     const resImage = await Image.findByPk(newImage.id, {
         include: { model: Comment, include: [User] },
@@ -67,7 +66,7 @@ router.delete('/', asyncHandler(async (req, res) => {
 
 
 // edit image
-router.put('/', editValidation, imageValidation, asyncHandler(async (req, res) => {
+router.put('/', editValidation, asyncHandler(async (req, res) => {
     const image = await Image.findByPk(req.body.id);
     image.set(req.body);
     await image.save();
