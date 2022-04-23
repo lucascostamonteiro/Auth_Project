@@ -12,9 +12,10 @@ const isProduction = environment === 'production';
 const app = express();
 const routes = require('./routes');
 
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 app.use(morgan('dev'));
 app.use(cookieParser());
-app.use(express.json());
 
 // Security Middleware
 if (!isProduction) {
