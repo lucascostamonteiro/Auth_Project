@@ -4,7 +4,7 @@ import { addFavorites, deleteFavorites } from "../../store/favorites";
 import { eraseImage } from "../../store/images";
 import { editDescription } from "../../store/images";
 import Comments from "../Comments";
-import { FaStar } from "react-icons/fa";
+import { FaHeart, FaRegHeart } from "react-icons/fa";
 import './ImageDetail.css';
 
 function ImageDetail({ image, showModal }) {
@@ -13,15 +13,35 @@ function ImageDetail({ image, showModal }) {
     const [imageUrl, setImageUrl] = useState(image.imageUrl);
     const [content, setContent] = useState(image.content);
     const [errors, setErrors] = useState([]);
-    const [favorite, setFavorite] = useState(0)
-    const [favoriteVal, setFavoriteVal] = useState(false)
-    const [hover, setHover] = useState(null)
+    const [hover, setHover] = useState(false);
+    const [heart, setHeart] = useState(false);
+
     const user = useSelector(state => state.session.user);
+    const favoritesObj = useSelector(state => state.favorites);
+    const favorites = Object.values(favoritesObj);
+    const userFavorites = favorites?.filter(favorite => favorite?.userId === image?.userId)
+    const imageFavorites = favorites?.filter(favorite => favorite?.imageId === image?.id)
+
+    console.log('FAVORITES', favorites);
+    console.log('UF', userFavorites);
+    console.log('IMAGE', image);
+    console.log('USER', user);
 
     // const fileSelected = event => {
     //     const file = event.target.files[0]
     //     setImageUrl(file)
     // }
+
+    // let imageFavorites;
+    // let userFavorites;
+    // if (favorites) {
+    //     imageFavorites = favorites?.filter(favorite => favorite?.imageId === image?.id);
+    //     userFavorites = favorites?.filter(favorite => favorite?.userId === image?.userId);
+    // }
+    // useEffect(() => {
+    //     if (userFavorites) setHeart(true);
+    //     else setHeart(false);
+    // }, [userFavorites])
 
     useEffect(() => {
         const validationErrors = [];
@@ -49,27 +69,32 @@ function ImageDetail({ image, showModal }) {
     }
 
 
-    const handleFavorites = async (e) => {
+    const handleFavorites = (e) => {
         e.preventDefault();
         const data = {
             userId: user.id,
             imageId: image.id
         }
-        // console.log('IMAGE', data);
-        await dispatch(addFavorites(data))
-        setFavoriteVal(!favoriteVal)
+        dispatch(addFavorites(data))
+        setHover(false)
+
     };
 
-    const handleUnfavorites = async (e) => {
+    const handleUnfavorites = (e) => {
         e.preventDefault();
         const data = {
             userId: user.id,
             imageId: image.id
         }
         // console.log('IMAGE', data);
-        await dispatch(deleteFavorites(data))
-        setFavoriteVal(!favoriteVal)
+        dispatch(deleteFavorites(data))
+        setHover(true)
     };
+
+    // let heartIcon;
+    // if (heart) heartIcon = <i className="fa-solid fa-heart"></i>;
+    // else heartIcon = <i className="fa-regular fa-heart"></i>;
+
 
     return (
         <div className="modal-content-image">
@@ -85,34 +110,23 @@ function ImageDetail({ image, showModal }) {
                 </img>
             </div>
             {user && (user?.id === image?.userId) &&
-                <>
+                <div>
                     <button className="delete-button-image" onClick={deleteImage}>
                         <i className="far fa-trash-alt"></i>
                     </button >
                     <button className="edit-button-image" onClick={() => { setEditable(!editable) }}>
                         <i className="far fa-edit"></i>
                     </button>
-                    {/* <button className="favorites-button" onClick={handleFavorites}>
-                        <i className="fa-solid fa-star"></i>
-                    </button> */}
-                    <label />
-                    <input
-                        type='radio'
-                        name='favorite'
-                        value={favoriteVal}
-                        onClick={handleFavorites}
-                    />
-                    <FaStar
-                        className='favorite-star'
-                        size={40}
-                        onMouseEnter={() => setHover(favoriteVal)}
-                        onMouseLeave={() => setHover(null)}
-                        color={
-                            favoriteVal ? 'FFA534' : '#e4e5e9'
-                        }
-                    />
-                </>
+                </div>
             }
+            <div>
+                {user?.id !== image?.userId && userFavorites?.length ?
+                    <FaRegHeart className="details-page-heart-button" onClick={handleUnfavorites} onMouseLeave={() => setHover(false)} />
+                    : (hover ? <FaHeart className="favorite-button" onClick={handleFavorites} onMouseLeave={() => setHover(false)} />
+                        : <FaRegHeart className="favorite-button" onMouseEnter={() => setHover(true)} />
+                    )
+                }
+            </div>
             <div>
                 {editable && (
                     <form className="edit-form" onSubmit={handleSubmit}>

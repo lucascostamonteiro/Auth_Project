@@ -30,27 +30,31 @@ const loadFavorites = (images) => {
 
 export const addFavorites = (data) => async (dispatch) => {
   const res = await csrfFetch(`/api/favorites/`, {
-    method: 'POST',
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
     body: JSON.stringify(data)
   })
   if (res.ok) {
     const favoritedImage = await res.json();
     dispatch(favorite(favoritedImage));
+    return favoritedImage;
   } else {
     const errors = await res.json();
     console.log(errors.errors);
   }
 };
 
-export const deleteFavorites = (data) => async (dispatch) => {
+export const deleteFavorites = (id) => async (dispatch) => {
   const res = await csrfFetch(`/api/favorites/`, {
     method: 'DELETE',
-    body: JSON.stringify(data)
   })
 
   if (res.ok) {
     const unFavoritedImage = await res.json();
-    dispatch(unfavorite(unFavoritedImage));
+    dispatch(unfavorite(id));
+    return;
   } else {
     const errors = await res.json();
     console.log(errors.errors);
@@ -87,7 +91,7 @@ const favoritesReducer = (state = initialState, action) => {
 
     case UNFAVORITE: {
       const newState = { ...state };
-      delete newState[action.image.id]
+      delete newState[action.image]
       return newState;
     }
 

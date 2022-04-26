@@ -31,11 +31,11 @@ module.exports = router;
 
 
 // delete
-router.delete('/', asyncHandler(async (req, res) => {
+router.delete('/:id(\\d+)', asyncHandler(async (req, res) => {
   console.log('REQ.BODY', req.body);
     const unfavorite = await Favorite.findOne({
       where: {
-        imageId: req.body.imageId,
+        imageId: req.params.id,
         userId: req.body.userId
       }
     })
