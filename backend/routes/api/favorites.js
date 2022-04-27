@@ -5,20 +5,26 @@ const { Image, User, Favorite } = require('../../db/models');
 
 const router = express.Router();
 
-// get
+// get all
 router.get('/:userId', asyncHandler(async (req, res) => {
   const { userId } = req.params;
   const favorites = await Favorite.findAll({
     where: {
       userId
     },
-    include: [
-      { model: Image, include: [{ model: User }, { model: Favorite }] }
-    ],
   })
+  res.json(favorites);
+}))
 
-  const favoriteImages = favorites.map(favImage => favImage.Image);
-  res.json(favoriteImages);
+// get
+router.get('/image/:id', asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  const favorites = await Favorite.findAll({
+    where: {
+      imageId: id,
+    }
+  })
+  res.json(favorites);
 }))
 
 // post
@@ -27,22 +33,18 @@ router.post('/', asyncHandler(async (req, res) => {
   res.json(favorite);
 }))
 
-module.exports = router;
-
 
 // delete
-router.delete('/:id(\\d+)', asyncHandler(async (req, res) => {
-  console.log('REQ.BODY', req.body);
-    const unfavorite = await Favorite.findOne({
-      where: {
-        imageId: req.params.id,
-        userId: req.body.userId
-      }
-    })
-
-  await unfavorite.destroy();
-    res.status(204).end();
+router.delete('/:id', asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  const unfavorite = await Favorite.findOne({
+    where: {
+      id
+    }
   })
-)
+  await unfavorite.destroy();
+  res.json(unfavorite);
+  res.status(200).end();
+}))
 
 module.exports = router;

@@ -3,8 +3,11 @@ import { useSelector } from "react-redux";
 
 
 function MyFavorites() {
-  const allListingsObj = useSelector(state => state.listings)
-  const allListings = Object.values(allListingsObj).reverse();
+  const allImages = useSelector(state => state.images);
+  const userFavorites = Object.values(useSelector(state => state.favorites.user));
+
+
+  console.log('ALL', allImages);
 
 
   const handleImgError = (e) => {
@@ -13,12 +16,12 @@ function MyFavorites() {
 
   return (
     <>
-
+      {userFavorites.map(favorite => (
+        <img src={allImages[favorite?.imageId]?.imageUrl} onError={handleImgError}/>
+      ))}
     </>
   )
 }
 
 
 export default MyFavorites;
-
-

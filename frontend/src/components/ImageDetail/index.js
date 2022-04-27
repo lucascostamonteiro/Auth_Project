@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addFavorites, deleteFavorites } from "../../store/favorites";
+import { addFavorites, deleteFavorites, loadFavoriteImages } from "../../store/favorites";
 import { eraseImage } from "../../store/images";
 import { editDescription } from "../../store/images";
 import Comments from "../Comments";
@@ -14,34 +14,12 @@ function ImageDetail({ image, showModal }) {
     const [content, setContent] = useState(image.content);
     const [errors, setErrors] = useState([]);
     const [hover, setHover] = useState(false);
-    const [heart, setHeart] = useState(false);
 
     const user = useSelector(state => state.session.user);
-    const favoritesObj = useSelector(state => state.favorites);
-    const favorites = Object.values(favoritesObj);
-    const userFavorites = favorites?.filter(favorite => favorite?.userId === image?.userId)
-    const imageFavorites = favorites?.filter(favorite => favorite?.imageId === image?.id)
+    const favorites = Object.values(useSelector(state => state.favorites.images));
+    const userFavorites = Object.values(useSelector(state => state.favorites.user));
+    const favoriteExists = userFavorites.filter(favorite => favorite?.imageId === image?.id);
 
-    console.log('FAVORITES', favorites);
-    console.log('UF', userFavorites);
-    console.log('IMAGE', image);
-    console.log('USER', user);
-
-    // const fileSelected = event => {
-    //     const file = event.target.files[0]
-    //     setImageUrl(file)
-    // }
-
-    // let imageFavorites;
-    // let userFavorites;
-    // if (favorites) {
-    //     imageFavorites = favorites?.filter(favorite => favorite?.imageId === image?.id);
-    //     userFavorites = favorites?.filter(favorite => favorite?.userId === image?.userId);
-    // }
-    // useEffect(() => {
-    //     if (userFavorites) setHeart(true);
-    //     else setHeart(false);
-    // }, [userFavorites])
 
     useEffect(() => {
         const validationErrors = [];
@@ -61,12 +39,15 @@ function ImageDetail({ image, showModal }) {
         e.preventDefault();
         dispatch(eraseImage(image));
         showModal(false);
-        showModal(false);
     };
 
     const handleImgError = (e) => {
         e.target.src = '../../../../static/not-image.png';
     }
+
+    useEffect(() => {
+        dispatch(loadFavoriteImages(image?.id))
+    }, [])
 
 
     const handleFavorites = (e) => {
@@ -83,17 +64,11 @@ function ImageDetail({ image, showModal }) {
     const handleUnfavorites = (e) => {
         e.preventDefault();
         const data = {
-            userId: user.id,
-            imageId: image.id
+            id: favoriteExists[0].id
         }
-        // console.log('IMAGE', data);
         dispatch(deleteFavorites(data))
         setHover(true)
     };
-
-    // let heartIcon;
-    // if (heart) heartIcon = <i className="fa-solid fa-heart"></i>;
-    // else heartIcon = <i className="fa-regular fa-heart"></i>;
 
 
     return (
@@ -120,11 +95,9 @@ function ImageDetail({ image, showModal }) {
                 </div>
             }
             <div>
-                {user?.id !== image?.userId && userFavorites?.length ?
-                    <FaRegHeart className="details-page-heart-button" onClick={handleUnfavorites} onMouseLeave={() => setHover(false)} />
-                    : (hover ? <FaHeart className="favorite-button" onClick={handleFavorites} onMouseLeave={() => setHover(false)} />
-                        : <FaRegHeart className="favorite-button" onMouseEnter={() => setHover(true)} />
-                    )
+                {user?.id !== image?.userId && favoriteExists?.length ?
+                    <FaHeart className="details-page-heart-button" onClick={handleUnfavorites} onMouseLeave={() => setHover(false)} />
+                    : <FaRegHeart className="favorite-button" onClick={handleFavorites} onMouseLeave={() => setHover(false)} />
                 }
             </div>
             <div>

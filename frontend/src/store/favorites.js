@@ -1,29 +1,36 @@
 import { csrfFetch } from './csrf';
 
-const FAVORITE = 'images/FAVORITE';
-const UNFAVORITE = 'images/UNFAVORITE'
+const FAVORITE = 'favorites/FAVORITE';
+const UNFAVORITE = 'favorites/UNFAVORITE'
 const LOAD_FAVORITES = 'favorites/LOAD_FAVORITES';
+const IMAGE_FAVORITES = 'favorites/IMAGE_FAVORITES';
 
-const favorite = (image, userId) => {
+
+const addFavorite = (favorite) => {
   return {
     type: FAVORITE,
-    image,
-    userId
+    favorite,
   }
 }
 
-const unfavorite = (image, userId) => {
+const removeFavorite = (favorite) => {
   return {
     type: UNFAVORITE,
-    image,
-    userId
+    favorite,
   }
 }
 
-const loadFavorites = (images) => {
+const userFavorites = (favorites) => {
   return {
     type: LOAD_FAVORITES,
-    images
+    favorites
+  }
+}
+
+const imageFavorites = (favorites) => {
+  return {
+    type: IMAGE_FAVORITES,
+    favorites
   }
 }
 
@@ -38,7 +45,7 @@ export const addFavorites = (data) => async (dispatch) => {
   })
   if (res.ok) {
     const favoritedImage = await res.json();
-    dispatch(favorite(favoritedImage));
+    dispatch(addFavorite(favoritedImage));
     return favoritedImage;
   } else {
     const errors = await res.json();
@@ -46,14 +53,15 @@ export const addFavorites = (data) => async (dispatch) => {
   }
 };
 
-export const deleteFavorites = (id) => async (dispatch) => {
-  const res = await csrfFetch(`/api/favorites/`, {
+export const deleteFavorites = ({ id }) => async (dispatch) => {
+  const res = await csrfFetch(`/api/favorites/${id}`, {
     method: 'DELETE',
   })
 
   if (res.ok) {
     const unFavoritedImage = await res.json();
-    dispatch(unfavorite(id));
+    console.log('unFavoritedImage', unFavoritedImage);
+    dispatch(removeFavorite(unFavoritedImage));
     return;
   } else {
     const errors = await res.json();
@@ -62,10 +70,21 @@ export const deleteFavorites = (id) => async (dispatch) => {
 };
 
 export const loadFavoriteImages = (id) => async (dispatch) => {
-  const res = await csrfFetch(`/api/favorites/`)
+  const res = await csrfFetch(`/api/favorites/image/${id}`)
   if (res.ok) {
     const favorites = await res.json();
-    dispatch(loadFavorites(favorites));
+    dispatch(imageFavorites(favorites));
+  } else {
+    const errors = await res.json();
+    console.log(errors.errors);
+  }
+}
+
+export const loadUserFavorites = (userId) => async (dispatch) => {
+  const res = await csrfFetch(`/api/favorites/${userId}`)
+  if (res.ok) {
+    const favorites = await res.json();
+    dispatch(userFavorites(favorites));
   } else {
     const errors = await res.json();
     console.log(errors.errors);
@@ -73,25 +92,43 @@ export const loadFavoriteImages = (id) => async (dispatch) => {
 }
 
 
-const initialState = {};
+
+const initialState = { user: {}, images: {} };
 
 const favoritesReducer = (state = initialState, action) => {
+  let newState;
   switch (action.type) {
-    case LOAD_FAVORITES: {
-      const newState = {};
-      action.images.forEach((image) => {
-        newState[image.id] = image;
+    case IMAGE_FAVORITES: {
+      newState = { user: { ...state.user } };
+      const imageFavorites = {}
+      action.favorites.forEach(favorite => {
+        imageFavorites[favorite.userId] = favorite;
       })
+      newState.images = imageFavorites;
+      return newState;
+    }
+
+    case LOAD_FAVORITES: {
+      newState = { images: { ...state.images } }
+      const userFavorites = {}
+      action.favorites.forEach(favorite => {
+        userFavorites[favorite.imageId] = favorite;
+      })
+      newState.user = userFavorites;
       return newState;
     }
 
     case FAVORITE: {
-      return { [action.image.id]: action.image, ...state };
+      const newState = { user: { ...state.user }, images: { ...state.images } };
+      newState.user[action.favorite.id] = action.favorite
+      newState.images[action.favorite.id] = action.favorite
+      return newState
     }
 
     case UNFAVORITE: {
-      const newState = { ...state };
-      delete newState[action.image]
+      const newState = { user: { ...state.user }, images: { ...state.images } };
+      delete newState.user[action.favorite.id]
+      delete newState.images[action.favorite.id]
       return newState;
     }
 
