@@ -9,7 +9,7 @@ const SingleComment = ({ comment }) => {
     const username = comment.User.username;
     const [editCommentId, setEditCommentId] = useState(null);
     const user = useSelector(state => state.session.user);
-    // console.log('COMT', comment);
+
 
     const handleEditClick = (e, user) => {
         e.preventDefault();
@@ -22,20 +22,23 @@ const SingleComment = ({ comment }) => {
 
 
     return (
-        <>
-            <span className='span-comment'>{username}: {comment.comment}</span>
+        <div className='comment-main'>
+            <div className='span-comment'><span className='username-comment'>{username}:</span> <span className='comment-content'>{comment.comment}</span></div>
+            <div className='edit-buttons-comment'>
                 {editCommentId === user.id ? (
                     <EditableRow
+                        className="editable-button"
                         comment={comment}
                         handleDoneClick={handleDoneClick}
                     />
                 ) :
                     <ReadOnlyRow
+                        className="read-button-edit"
                         comment={comment}
                         handleEditClick={handleEditClick}
                     />}
-
-        </>
+            </div>
+        </div>
     )
 }
 export default SingleComment;
