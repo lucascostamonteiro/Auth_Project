@@ -7,13 +7,16 @@ import MainPage from "./components/MainPage";
 import MyFavorites from "./components/MyFavorites";
 import { loadUserFavorites } from "./store/favorites";
 import { getImages } from "./store/images";
+import ImageDetail from "./components/ImageDetail";
 
 
 function App() {
   const dispatch = useDispatch();
   const user = useSelector(state => state.session.user);
   const [isLoaded, setIsLoaded] = useState(false);
+  const image = useSelector(state => state.images);
 
+  console.log('IMAGE', images)
 
   useEffect(() => {
     if (user) dispatch(loadUserFavorites(user?.id))
@@ -40,6 +43,9 @@ function App() {
           {/* <Route path='/search/:searchQuery'>
             <Search />
           </Route> */}
+          <Route path='/images/:id' exact={true}>
+            <ImageDetail image={image} description={image.content}/>
+          </Route>
           <Route>
             <h1>Page Not Found</h1>
           </Route>

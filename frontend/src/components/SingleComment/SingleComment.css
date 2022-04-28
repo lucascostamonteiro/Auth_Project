@@ -1,5 +1,23 @@
-.single-comment-row{
-    padding-bottom: 15px;
+.single-comment-row {
+  padding-bottom: 15px;
 }
 
+.username-comment {
+  font-weight: bold;
+}
 
+.username-comment,
+.comment-content {
+  font-size: 12px;
+}
+
+.comment-main {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.edit-buttons-comment {
+  margin-right: 50px;
+}

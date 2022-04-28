@@ -1,8 +1,18 @@
-/* .image-detail-div {
+.main-image {
+  box-sizing: content-box;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  /* width: 340px; */
+  /* height: auto; */
+  max-height: 100vh;
+  /* max-width: 700px; */
+  padding: 10px 30px 10px 30px;
+  justify-content: center;
+  border-radius: 5px;
   overflow-y: scroll;
-  position: relative;
-  width: fit-content;
-} */
+  overflow-x: hidden;
+}
 
 .single-image-detail {
   max-width: 50vw;
@@ -15,7 +25,7 @@
 .single-image-title-detail {
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
-/* 
+/*
 .edit-form {
   display: flex;
   flex-direction: column;
@@ -29,4 +39,22 @@
 .edit-button {
   justify-content: center;
   width: 86px;
+}
+
+.image-title-div {
+  object-fit: scale-down;
+  max-height: 550px;
+}
+
+.image-title-favorite-div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.favorite-button {
+  font-size: 26px;
+  padding-right: 25px;
+  color: red;
 }

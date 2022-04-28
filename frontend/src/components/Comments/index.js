@@ -32,14 +32,14 @@ function Comments({ image }) {
     }, [dispatch, image.id]);
 
     return (
-        <div className="comments-div">
-            <div className="errors-list">
-                <ul>
-                    {validationErrors.map(error => <li key={error}>{error}</li>)}
-                </ul>
-            </div>
-            <h3 className="comments-title">Comments</h3>
-            <div className="comment-box">
+        <div className="comment-box">
+            <div className="comments-div">
+                <div className="errors-list">
+                    <ul>
+                        {validationErrors.map(error => <li key={error}>{error}</li>)}
+                    </ul>
+                </div>
+                <h3 className="comments-title">Comments</h3>
                 {comments?.map((comment) => (
                     <span key={comment.id} className='single-comment-row'>
                         <SingleComment comment={comment} />

@@ -21,6 +21,9 @@ function ImageDetail({ image, showModal }) {
     const favoriteExists = userFavorites.filter(favorite => favorite?.imageId === image?.id);
 
 
+    console.log('USER', user)
+    console.log('IMAGE', image)
+
     useEffect(() => {
         const validationErrors = [];
         // if (!imageUrl.length) validationErrors.push("Please provide a valid URL");
@@ -72,9 +75,19 @@ function ImageDetail({ image, showModal }) {
 
 
     return (
-        <div className="modal-content-image">
-            <div>
-                <h2 className="single-image-title-detail">{image?.content}</h2>
+        <div className="main-image">
+            <div className="image-title-div">
+                <div className="image-title-favorite-div">
+                    <h2 className="single-image-title-detail">{image?.content}</h2>
+                    {(user?.id !== image?.userId) &&
+                        <div>
+                            {favoriteExists?.length ?
+                                <FaHeart className="favorite-button" onClick={handleUnfavorites} onMouseLeave={() => setHover(false)} />
+                                : <FaRegHeart className="favorite-button" onClick={handleFavorites} onMouseLeave={() => setHover(false)} />
+                            }
+                        </div>
+                    }
+                </div>
 
                 <img
                     className="single-image-detail"
@@ -83,6 +96,7 @@ function ImageDetail({ image, showModal }) {
                     alt={image.content}
                     onError={handleImgError}>
                 </img>
+
             </div>
             {user && (user?.id === image?.userId) &&
                 <div>
@@ -94,12 +108,6 @@ function ImageDetail({ image, showModal }) {
                     </button>
                 </div>
             }
-            <div>
-                {user?.id !== image?.userId && favoriteExists?.length ?
-                    <FaHeart className="details-page-heart-button" onClick={handleUnfavorites} onMouseLeave={() => setHover(false)} />
-                    : <FaRegHeart className="favorite-button" onClick={handleFavorites} onMouseLeave={() => setHover(false)} />
-                }
-            </div>
             <div>
                 {editable && (
                     <form className="edit-form" onSubmit={handleSubmit}>
