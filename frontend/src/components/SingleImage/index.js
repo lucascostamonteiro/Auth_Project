@@ -7,6 +7,10 @@ import './SingleImage.css'
 const SingleImage = ({ image }) => {
     const [showModal, setShowModal] = useState(false);
 
+    const handleImgError = (e) => {
+        e.target.src = '../../../../static/not-image.png';
+    }
+
     return (
         <div className='image-div'>
             <h2 className='image-title'>{image.content}</h2>
@@ -15,6 +19,7 @@ const SingleImage = ({ image }) => {
                 key={image.id}
                 src={image.imageUrl}
                 alt={image.content}
+                onError={handleImgError}
                 className="single-image"
             >
             </img>

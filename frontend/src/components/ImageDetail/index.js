@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { addFavorites, deleteFavorites, loadFavoriteImages } from "../../store/favorites";
 import { eraseImage } from "../../store/images";
 import { editDescription } from "../../store/images";
 import Comments from "../Comments";
+import { FaHeart, FaRegHeart } from "react-icons/fa";
 import './ImageDetail.css';
 
 function ImageDetail({ image, showModal }) {
@@ -11,17 +13,21 @@ function ImageDetail({ image, showModal }) {
     const [imageUrl, setImageUrl] = useState(image.imageUrl);
     const [content, setContent] = useState(image.content);
     const [errors, setErrors] = useState([]);
-    const user = useSelector(state => state.session.user);
+    const [hover, setHover] = useState(false);
 
-    console.log('***', image)
+    const user = useSelector(state => state.session.user);
+    const favorites = Object.values(useSelector(state => state.favorites.images));
+    const userFavorites = Object.values(useSelector(state => state.favorites.user));
+    const favoriteExists = userFavorites.filter(favorite => favorite?.imageId === image?.id);
+
 
     useEffect(() => {
         const validationErrors = [];
-        if (!imageUrl.length) validationErrors.push("Please provide a valid URL");
-        if (imageUrl.length > 0 && !imageUrl.match(/^https?:\/\/.+\/.+$/)) validationErrors.push("Please provide a valid URL");
+        // if (!imageUrl.length) validationErrors.push("Please provide a valid URL");
+        // if (imageUrl.length > 0 && !imageUrl.match(/^https?:\/\/.+\/.+$/)) validationErrors.push("Please provide a valid URL");
         if (!content.length) validationErrors.push("Please provide a description");
         setErrors(validationErrors);
-    }, [imageUrl, content])
+    }, [content])
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -35,6 +41,35 @@ function ImageDetail({ image, showModal }) {
         showModal(false);
     };
 
+    const handleImgError = (e) => {
+        e.target.src = '../../../../static/not-image.png';
+    }
+
+    useEffect(() => {
+        dispatch(loadFavoriteImages(image?.id))
+    }, [])
+
+
+    const handleFavorites = (e) => {
+        e.preventDefault();
+        const data = {
+            userId: user.id,
+            imageId: image.id
+        }
+        dispatch(addFavorites(data))
+        setHover(false)
+
+    };
+
+    const handleUnfavorites = (e) => {
+        e.preventDefault();
+        const data = {
+            id: favoriteExists[0].id
+        }
+        dispatch(deleteFavorites(data))
+        setHover(true)
+    };
+
 
     return (
         <div className="modal-content-image">
@@ -45,19 +80,26 @@ function ImageDetail({ image, showModal }) {
                     className="single-image-detail"
                     key={image.id}
                     src={image.imageUrl}
-                    alt={image.content}>
+                    alt={image.content}
+                    onError={handleImgError}>
                 </img>
             </div>
             {user && (user?.id === image?.userId) &&
-                <>
+                <div>
                     <button className="delete-button-image" onClick={deleteImage}>
                         <i className="far fa-trash-alt"></i>
                     </button >
-                    <button className="edit-button-image" onClick={() => {setEditable(!editable) }}>
+                    <button className="edit-button-image" onClick={() => { setEditable(!editable) }}>
                         <i className="far fa-edit"></i>
                     </button>
-                </>
+                </div>
             }
+            <div>
+                {user?.id !== image?.userId && favoriteExists?.length ?
+                    <FaHeart className="details-page-heart-button" onClick={handleUnfavorites} onMouseLeave={() => setHover(false)} />
+                    : <FaRegHeart className="favorite-button" onClick={handleFavorites} onMouseLeave={() => setHover(false)} />
+                }
+            </div>
             <div>
                 {editable && (
                     <form className="edit-form" onSubmit={handleSubmit}>
@@ -66,26 +108,27 @@ function ImageDetail({ image, showModal }) {
                                 <li className='error' key={idx}>{error}</li>
                             ))}
                         </ul>
-                        <input
+                        {/* <input
                             name='imageUrl'
                             type="text"
                             value={imageUrl}
                             onChange={(e) => setImageUrl(e.target.value)}
                             placeholder="Image URL"
                             required
-                        />
+                        /> */}
+                        <label htmlFor="Description">Description</label>
                         <input
                             name='content'
                             type="text"
                             value={content}
                             onChange={(e) => setContent(e.target.value)}
-                            placeholder="Description"
+                            placeholder="Enter a new description..."
                             required
                         />
                         <button
                             className="edit-button"
                             type="submit"
-                            disabled={errors.length > 0}
+                        // disabled={errors.length > 0}
                         >Submit Edit</button>
                     </form>
                 )}

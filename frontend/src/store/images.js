@@ -5,6 +5,7 @@ const CREATE = 'images/CREATE';
 const DELETE = 'images/DELETE';
 const EDIT = 'images/EDIT'
 
+
 const loadImages = images => ({
     type: LOAD,
     images
@@ -26,6 +27,8 @@ const editImage = image => ({
 });
 
 
+
+
 export const getImages = () => async dispatch => {
     const res = await csrfFetch(`/api/images`);
     if (res.ok) {
@@ -38,13 +41,15 @@ export const getImages = () => async dispatch => {
 };
 
 
-export const addImage = data => async dispatch => {
+export const addImage = formData => async dispatch => {
     const res = await csrfFetch(`/api/images`, {
         method: "POST",
-        body: JSON.stringify(data)
+        headers: { "Content-Type": "multipart/form-data" },
+        body: formData
     });
     if (res.ok) {
-        dispatch(createImage(data));
+        const image = await res.json();
+        dispatch(createImage(image));
         return;
     } else {
         const errors = await res.json();
@@ -82,6 +87,7 @@ export const editDescription = data => async dispatch => {
 };
 
 
+
 const initialState = {};
 
 const imageReducer = (state = initialState, action) => {
@@ -95,8 +101,7 @@ const imageReducer = (state = initialState, action) => {
         }
 
         case CREATE: {
-            const newState = { [action.image.id]: action.image, ...state };
-            return newState
+            return { [action.image.id]: action.image, ...state };
         }
 
         case DELETE: {

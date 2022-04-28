@@ -41,8 +41,8 @@ function Comments({ image }) {
             <h3 className="comments-title">Comments</h3>
             <div className="comment-box">
                 {comments?.map((comment) => (
-                    <span className='single-comment-row'>
-                        <SingleComment key={comment.id} comment={comment} />
+                    <span key={comment.id} className='single-comment-row'>
+                        <SingleComment comment={comment} />
                     </span>
                 ))}
             </div>
