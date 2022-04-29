@@ -7,7 +7,7 @@ import './Comments.css';
 function Comments({ image }) {
     const dispatch = useDispatch();
     const commentsObj = useSelector(state => state.comments);
-    const comments = Object.values(commentsObj);
+    const comments = Object.values(commentsObj).reverse();
     const user = useSelector((state) => state.session.user);
     const [commentData, setCommentData] = useState('');
     const [validationErrors, setValidationErrors] = useState([]);
