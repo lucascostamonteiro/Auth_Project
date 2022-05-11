@@ -11,6 +11,8 @@ const SingleComment = ({ comment }) => {
     const user = useSelector(state => state.session.user);
 
 
+    // console.log('DEBUG ++', comment)
+
     const handleEditClick = (e, user) => {
         e.preventDefault();
         setEditCommentId(user.id);

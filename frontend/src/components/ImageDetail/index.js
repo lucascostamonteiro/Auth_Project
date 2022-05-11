@@ -85,26 +85,27 @@ function ImageDetail({ image, showModal }) {
                         </div>
                     }
                 </div>
-
-                <img
-                    className="single-image-detail"
-                    key={image.id}
-                    src={image.imageUrl}
-                    alt={image.content}
-                    onError={handleImgError}>
-                </img>
-
-            </div>
-            {user && (user?.id === image?.userId) &&
                 <div>
-                    <button className="delete-button-image" onClick={deleteImage}>
-                        <i className="far fa-trash-alt"></i>
-                    </button >
-                    <button className="edit-button-image" onClick={() => { setEditable(!editable) }}>
-                        <i className="far fa-edit"></i>
-                    </button>
+                    <img
+                        className="single-image-detail"
+                        key={image.id}
+                        src={image.imageUrl}
+                        alt={image.content}
+                        onError={handleImgError}>
+                    </img>
+
                 </div>
-            }
+                {user && (user?.id === image?.userId) &&
+                    <div>
+                        <button className="delete-button-image" onClick={deleteImage}>
+                            <i className="far fa-trash-alt"></i>
+                        </button >
+                        <button className="edit-button-image" onClick={() => { setEditable(!editable) }}>
+                            <i className="far fa-edit"></i>
+                        </button>
+                    </div>
+                }
+            </div>
             <div>
                 {editable && (
                     <form className="edit-form" onSubmit={handleSubmit}>
