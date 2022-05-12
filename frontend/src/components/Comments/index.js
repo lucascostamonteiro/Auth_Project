@@ -14,7 +14,7 @@ function Comments({ image }) {
 
     useEffect(() => {
         const validationErrors = [];
-        if (!commentData.length) validationErrors.push('Please provide a comment');
+        if (!commentData.length) validationErrors.push('Comments must contain at least one character');
         setValidationErrors(validationErrors)
         return validationErrors;
     }, [commentData])

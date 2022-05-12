@@ -50,11 +50,11 @@ button:hover {
 
 .edit-form {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   border: 0.5px solid black;
-  padding: 1.5px 3.5px 12.5px 3.5px;
-  margin: 15px 210px;
+  padding: 7.5px 13.5px 10.5px 20.5px;
+  margin: 7px 100px;
   border-radius: 10px;
 }
 
@@ -191,7 +191,7 @@ button:hover {
   color: red;
   font-weight: bold;
   margin: -22px;
-  padding-top: 40px;
+  /* padding-top: 40px; */
 }
 
 .comment-box {
