@@ -1,13 +1,27 @@
 .main-image {
+  /* box-sizing: content-box; */
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* background-color: white; */
+  /* width: 340px; */
+  /* height: auto; */
+  /* max-height: 100vh; */
+  /* max-width: 700px; */
+  /* padding: 10px 30px 10px 30px; */
+  /* justify-content: center; */
+  /* border-radius: 5px; */
+  /* overflow-y: scroll; */
+  /* overflow-x: hidden; */
+
   box-sizing: content-box;
   display: flex;
   flex-direction: column;
   background-color: white;
   /* width: 340px; */
-  /* height: auto; */
-  max-height: 100vh;
+  height: 844px;
+  /* max-height: 94vh; */
   /* max-width: 700px; */
-  padding: 10px 30px 10px 30px;
+  padding: 21px 30px 10px 30px;
   justify-content: center;
   border-radius: 5px;
   overflow-y: scroll;
@@ -39,6 +53,9 @@
 .edit-button {
   justify-content: center;
   width: 86px;
+  border-radius: 7px;
+  padding: 3px;
+  border-color: gray;
 }
 
 .image-title-div {

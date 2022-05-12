@@ -12,16 +12,15 @@ function Comments({ image }) {
     const [commentData, setCommentData] = useState('');
     const [validationErrors, setValidationErrors] = useState([]);
 
-    const validate = () => {
+    useEffect(() => {
         const validationErrors = [];
         if (!commentData.length) validationErrors.push('Please provide a comment');
+        setValidationErrors(validationErrors)
         return validationErrors;
-    }
+    }, [commentData])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const errors = validate();
-        if (errors.length > 0) return setValidationErrors(errors);
         const data = { userId: user.id, imageId: image.id, commentData };
         dispatch(addComment(data))
         setCommentData('')

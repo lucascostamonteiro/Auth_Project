@@ -26,7 +26,7 @@ function SignupForm() {
 
     return (
         <form className="main-user-signup" onSubmit={handleSubmit}>
-            <div className='errors-list'>
+            <div className='errors-list-signup'>
                 <ul className='single-error'>
                     {errors.map((error, idx) => <li className='error' key={idx}>{error}</li>)}
                 </ul>

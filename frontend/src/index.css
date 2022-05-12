@@ -1,3 +1,13 @@
+button {
+  background-color: white;
+}
+
+button:hover {
+  background: rgb(151, 147, 161);
+  transition: all;
+  color: white;
+}
+
 .new-image-form {
   display: flex;
   flex-direction: column;
@@ -180,6 +190,8 @@
 .errors-list {
   color: red;
   font-weight: bold;
+  margin: -22px;
+  padding-top: 40px;
 }
 
 .comment-box {
