@@ -7,7 +7,7 @@ function MyFavorites() {
   const userFavorites = Object.values(useSelector(state => state.favorites.user));
 
 
-  console.log('ALL', allImages);
+  // console.log('ALL', allImages);
 
 
   const handleImgError = (e) => {
