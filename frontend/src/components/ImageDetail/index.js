@@ -16,12 +16,12 @@ function ImageDetail({ image, showModal }) {
     const [hover, setHover] = useState(false);
 
     const user = useSelector(state => state.session.user);
-    const favorites = Object.values(useSelector(state => state.favorites.images));
+    // const favorites = Object.values(useSelector(state => state.favorites.images));
     const userFavorites = Object.values(useSelector(state => state.favorites.user));
     const favoriteExists = userFavorites.filter(favorite => favorite?.imageId === image?.id);
 
 
-    console.log('IMAGE', image)
+    // console.log('IMAGE', image)
 
     useEffect(() => {
         const validationErrors = [];

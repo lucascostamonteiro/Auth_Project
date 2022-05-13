@@ -9,6 +9,8 @@ function MyFavorites() {
   const userFavorites = Object.values(useSelector(state => state.favorites.user));
   const [showModal, setShowModal] = useState(false);
 
+  // const favorites = Object.values(useSelector(state => state.favorites));
+  console.log('FAVORITES', userFavorites)
 
   const handleImgError = (e) => {
     e.target.src = '../../../../static/not-image.png';
@@ -31,6 +33,7 @@ function MyFavorites() {
           ))}
         </>
       }
+      // TODO FIGURE OUT HOW TO PASS SINGLE IMAGE FAVORITES TO IMAGE DETAIL COMPONENT 
       {showModal && userFavorites?.map(favorite => (
         <ModalImage onClose={() => setShowModal(false)}>
           <ImageDetail image={allImages[favorite?.imageId]} description={allImages[favorite?.imageId]?.content} showModal={setShowModal} />

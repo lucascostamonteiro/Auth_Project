@@ -16,16 +16,16 @@ const SingleImage = ({ image }) => {
             <h2 className='image-title'>{image.content}</h2>
             <img
                 onClick={() => setShowModal(true)}
-                key={image.id}
-                src={image.imageUrl}
-                alt={image.content}
+                key={image?.id}
+                src={image?.imageUrl}
+                alt={image?.content}
                 onError={handleImgError}
                 className="single-image"
             >
             </img>
             {showModal && (
                 <ModalImage onClose={() => setShowModal(false)}>
-                    <ImageDetail image={image} description={image.content} showModal={setShowModal} />
+                    <ImageDetail image={image} description={image?.content} showModal={setShowModal} />
                 </ModalImage>
             )}
         </div>
