@@ -30,7 +30,7 @@ function Navigation({ isLoaded }) {
         <>
             <div className='main-navbar'>
                 <div className='left-navbar'>
-                    <NavLink exact to="/"> <div className='home-button'>Estádium</div></NavLink>
+                    <NavLink className="home-link" exact to="/"> <div className='home-button'>Estádium</div></NavLink>
                 </div>
                 <div className='right-navbar'>
                     {isLoaded && sessionLinks}

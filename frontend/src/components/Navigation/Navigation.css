@@ -68,3 +68,26 @@
 .user-favorites:hover {
   text-decoration: underline;
 }
+
+.home-button {
+  text-align: center;
+  background-color: white;
+  border-radius: 2px;
+  margin-top: 6px;
+  padding: 6px;
+  width: 70px;
+  margin-left: 5px;
+  font-weight: bold;
+}
+
+.active {
+  text-decoration: none;
+  color: black;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+.home-button:hover {
+  background: rgb(134, 130, 146);
+  transition: all;
+  color: white;
+}

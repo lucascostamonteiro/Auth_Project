@@ -114,14 +114,6 @@ function ImageDetail({ image, showModal }) {
                                 <li className='error' key={idx}>{error}</li>
                             ))}
                         </ul>
-                        {/* <input
-                            name='imageUrl'
-                            type="text"
-                            value={imageUrl}
-                            onChange={(e) => setImageUrl(e.target.value)}
-                            placeholder="Image URL"
-                            required
-                        /> */}
                         <label htmlFor="Description">Description</label>
                         <input
                             name='content'

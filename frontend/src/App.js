@@ -35,6 +35,7 @@ function App() {
             <MainPage />
           </Route>
           <Route path='/myfavorites' exact={true}>
+            <Navigation isLoaded={isLoaded} />
             <MyFavorites />
           </Route>
           {/* <Route path='/search/:searchQuery'>

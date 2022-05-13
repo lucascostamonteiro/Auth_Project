@@ -247,3 +247,37 @@ button:hover {
   align-items: flex-start;
   padding-top: 20px;
 }
+
+.home-link {
+  text-decoration: none;
+  color: black;
+}
+
+/*  MY FAVORITES */
+.favorite-main-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 3%;
+  padding-bottom: 4%;
+}
+
+.single-image-favorite {
+  max-width: 40%;
+  height: auto;
+  border-radius: 5px;
+  box-shadow: 5px 5px 15px 5px rgb(141, 132, 132);
+  cursor: zoom-in;
+}
+
+.favorites-title {
+  margin-top: 90px;
+  margin-left: 130px;
+  text-decoration: underline;
+}
+
+.favorites-sub-title {
+  margin-top: 90px;
+  margin-left: 130px;
+}
