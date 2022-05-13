@@ -33,7 +33,7 @@ function MyFavorites() {
           ))}
         </>
       }
-      // TODO FIGURE OUT HOW TO PASS SINGLE IMAGE FAVORITES TO IMAGE DETAIL COMPONENT 
+      {/* // TODO FIGURE OUT HOW TO PASS SINGLE IMAGE FAVORITES TO IMAGE DETAIL COMPONENT  */}
       {showModal && userFavorites?.map(favorite => (
         <ModalImage onClose={() => setShowModal(false)}>
           <ImageDetail image={allImages[favorite?.imageId]} description={allImages[favorite?.imageId]?.content} showModal={setShowModal} />
