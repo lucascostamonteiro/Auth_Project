@@ -1,6 +1,5 @@
 import React from "react";
-import { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import SingleImage from "../SingleImage";
 
 

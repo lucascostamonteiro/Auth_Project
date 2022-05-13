@@ -21,6 +21,8 @@ function ImageDetail({ image, showModal }) {
     const favoriteExists = userFavorites.filter(favorite => favorite?.imageId === image?.id);
 
 
+    console.log('IMAGE', image)
+
     useEffect(() => {
         const validationErrors = [];
         // if (!imageUrl.length) validationErrors.push("Please provide a valid URL");

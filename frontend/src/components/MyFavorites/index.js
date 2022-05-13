@@ -1,19 +1,13 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { ModalImage } from '../../context/ImageModal';
-import { ImageDetail } from '../ImageDetail';
+import ImageDetail from '../ImageDetail';
 
 
 function MyFavorites() {
-  const sessionUser = useSelector(state => state.session.user);
   const allImages = useSelector(state => state.images);
   const userFavorites = Object.values(useSelector(state => state.favorites.user));
   const [showModal, setShowModal] = useState(false);
-  const singleFavorite = userFavorites.filter(favorite => sessionUser.id === favorite.userId);
-
-  console.log('ALL', userFavorites);
-  console.log('USER', sessionUser);
-  console.log('DEBUG', singleFavorite);
 
 
   const handleImgError = (e) => {
@@ -24,7 +18,7 @@ function MyFavorites() {
   return (
     <>
       <div><h1 className="favorites-title">My Favorites</h1></div>
-      {sessionUser?.id !== userFavorites?.userId ?
+      {!userFavorites?.length ?
         <div><h1 className="favorites-sub-title" >You don't have any favorite stadiums yet</h1></div>
         :
         <>
@@ -37,13 +31,11 @@ function MyFavorites() {
           ))}
         </>
       }
-      {
-        showModal && (
-          <ModalImage onClose={() => setShowModal(false)}>
-            {/* <ImageDetail image={image} description={image.content} showModal={setShowModal} /> */}
-          </ModalImage>
-        )
-      }
+      {showModal && userFavorites?.map(favorite => (
+        <ModalImage onClose={() => setShowModal(false)}>
+          <ImageDetail image={allImages[favorite?.imageId]} description={allImages[favorite?.imageId]?.content} showModal={setShowModal} />
+        </ModalImage>
+      ))}
     </>
   )
 }
