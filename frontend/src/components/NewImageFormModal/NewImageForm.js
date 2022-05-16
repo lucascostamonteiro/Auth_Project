@@ -17,7 +17,7 @@ function NewImageForm({ showModal }) {
         const validationErrors = [];
         if (!imageUrl.length) validationErrors.push("Please provide an image with a valid file extension (.jpg, .jpeg, .gif, .png, .tiff)");
         // if (imageUrl.length > 0 && !imageUrl.match(/^https?:\/\/.+\/.+$/)) validationErrors.push("Please provide a valid URL");
-        if (!content.length) validationErrors.push("Please provide a description");
+        if (!content.length) validationErrors.push("Description must contain at least one character");
         setErrors(validationErrors);
     }, [imageUrl, content])
 
@@ -36,11 +36,6 @@ function NewImageForm({ showModal }) {
         formData.append("image", imageUrl)
         formData.append("content", content)
 
-        // const data = {
-        //     userId: sessionUser.id,
-        //     imageUrl,
-        //     content
-        // };
         dispatch(addImage(formData));
         if (formData.errors) {
             setErrors(formData.errors)
@@ -62,17 +57,9 @@ function NewImageForm({ showModal }) {
                 ))}
             </ul>
             <div className="input-div">
-                {/* <input
-                    type="imageUrl"
-                    value={imageUrl}
-                    onChange={(e) => setImageUrl(e.target.value)}
-                    placeholder='Image Url'
-                    required
-                /> */}
                 <input
                     onChange={fileSelected}
                     type="file"
-                    // accept="image/*"
                     accept=".jpg, .jpeg, .gif, .png, .tiff"
                 />
                 <input
