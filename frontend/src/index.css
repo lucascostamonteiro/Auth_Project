@@ -291,13 +291,15 @@ button:hover {
 }
 
 .favorites-title,
-.search-title {
+.search-title,
+.user-image-title {
   margin-top: 90px;
   margin-left: 130px;
   text-decoration: underline;
 }
 
-.favorites-sub-title {
+.favorites-sub-title,
+.user-image-sub-title {
   margin-top: 90px;
   margin-left: 130px;
 }

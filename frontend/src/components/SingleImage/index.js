@@ -13,7 +13,7 @@ const SingleImage = ({ image }) => {
 
     return (
         <div className='image-div'>
-            <h2 className='image-title'>{image.content}</h2>
+            <h2 className='image-title'>{image?.content}</h2>
             <img
                 onClick={() => setShowModal(true)}
                 key={image?.id}

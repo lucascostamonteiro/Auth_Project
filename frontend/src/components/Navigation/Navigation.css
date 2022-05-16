@@ -64,16 +64,19 @@
   padding: 0px;
 }
 
-.user-favorites-text {
+.user-favorites-text,
+.user-images-text {
   padding-left: 4px;
 }
 
-.user-favorites {
+.user-favorites,
+.user-images {
   text-decoration: none;
   color: black;
 }
 
-.user-favorites:hover {
+.user-favorites:hover,
+.user-images:hover {
   text-decoration: underline;
 }
 
