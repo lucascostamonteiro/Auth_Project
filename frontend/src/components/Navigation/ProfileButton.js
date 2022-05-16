@@ -30,7 +30,7 @@ function ProfileButton({ user }) {
     };
 
     return (
-        <>
+        <div className="dropdown-menu">
             <button className="profile-icon-button" onClick={openMenu}>
                 <i className="far fa-user-circle"></i>
             </button>
@@ -40,10 +40,10 @@ function ProfileButton({ user }) {
                     <Link className="user-favorites" to={`/myfavorites`}>
                         <li className="user-favorites-text">My Favorites</li>
                     </Link>
-                    <li><button onClick={logout}>Log Out</button></li>
+                    <li className="li-logout"><button className="logout-button-profile" onClick={logout}>Log Out</button></li>
                 </ul>
             )}
-        </>
+        </div>
     );
 }
 

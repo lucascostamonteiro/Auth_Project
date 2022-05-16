@@ -1,25 +1,54 @@
+button {
+  background-color: white;
+  cursor: pointer;
+}
+
+html,
+body,
+input {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+button:hover {
+  background: rgb(151, 147, 161);
+  transition: all;
+  color: white;
+}
+
 .new-image-form {
   display: flex;
   flex-direction: column;
   background-color: white;
-  /* width: 100%; */
+  width: 320px;
   height: auto;
-  min-width: 308px;
-  min-height: 101px;
-  min-height: 430px;
-  padding: 0px 25px 20px 0px;
+  min-height: 273px;
+  padding: 0px 25px 20px 21px;
   justify-content: center;
   align-items: center;
   border-radius: 5px;
-  /* overflow-y: auto; */
+}
+
+.file-upload-button {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
 
 .image-div {
+  /* display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 7%; */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-top: 7%;
+  padding-top: 3%;
+  padding-bottom: 4%;
+}
+
+.image-title {
+  padding-bottom: 20px;
+  font-size: 30px;
 }
 
 .single-image {
@@ -40,11 +69,11 @@
 
 .edit-form {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   border: 0.5px solid black;
-  padding: 1.5px 3.5px 12.5px 3.5px;
-  margin: 15px 210px;
+  padding: 7.5px 13.5px 10.5px 20.5px;
+  margin: 7px 100px;
   border-radius: 10px;
 }
 
@@ -90,19 +119,21 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
-#new-image-form {
+#new-image-form,
+#image-form-button {
   text-align: center;
   border: 1px solid rgb(151, 147, 161);
   border-radius: 2px;
   margin-top: 6px;
   padding: 5px;
-  width: 100px;
+  width: 115px;
   margin-left: 5px;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   font-weight: bold;
 }
 
-#new-image-form:hover {
+#new-image-form:hover,
+#image-form-button:hover {
   background: rgb(151, 147, 161);
   transition: all;
   color: white;
@@ -180,6 +211,11 @@
 .errors-list {
   color: red;
   font-weight: bold;
+  margin: -22px;
+}
+
+.error {
+  padding-top: 12px;
 }
 
 .comment-box {
@@ -229,4 +265,39 @@
   flex-direction: column;
   align-items: flex-start;
   padding-top: 20px;
+}
+
+.home-link {
+  text-decoration: none;
+  color: black;
+}
+
+/*  MY FAVORITES */
+.favorite-main-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 3%;
+  padding-bottom: 4%;
+}
+
+.single-image-favorite {
+  max-width: 40%;
+  height: auto;
+  border-radius: 5px;
+  box-shadow: 5px 5px 15px 5px rgb(141, 132, 132);
+  cursor: zoom-in;
+}
+
+.favorites-title,
+.search-title {
+  margin-top: 90px;
+  margin-left: 130px;
+  text-decoration: underline;
+}
+
+.favorites-sub-title {
+  margin-top: 90px;
+  margin-left: 130px;
 }

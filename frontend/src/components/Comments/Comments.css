@@ -1,10 +1,25 @@
 .comments-div {
   display: flex;
   flex-direction: column;
-  padding-top: 20px;
+  margin-top: 20px;
 }
 
 .comments-title {
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   text-decoration: underline;
+}
+
+.comment-button {
+  justify-content: center;
+  width: 120px;
+  border-radius: 7px;
+  padding: 4px;
+  border-color: gray;
+  margin-top: 16px;
+}
+
+.new-comment-box {
+  resize: none;
+  min-width: 600px;
+  min-height: 58px;
 }

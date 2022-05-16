@@ -1,6 +1,5 @@
 import React from "react";
-import { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import SingleImage from "../SingleImage";
 
 
@@ -13,7 +12,7 @@ function UserHome() {
         <ul>
             {images?.map((image, idx) => (
                 <div key={idx}>
-                    < SingleImage image={image} />
+                    <SingleImage image={image} />
                 </div>
             ))}
         </ul>

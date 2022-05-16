@@ -7,6 +7,7 @@ import MainPage from "./components/MainPage";
 import MyFavorites from "./components/MyFavorites";
 import { loadUserFavorites } from "./store/favorites";
 import { getImages } from "./store/images";
+import SearchPage from "./components/SearchPage";
 
 
 function App() {
@@ -35,11 +36,13 @@ function App() {
             <MainPage />
           </Route>
           <Route path='/myfavorites' exact={true}>
+            <Navigation isLoaded={isLoaded} />
             <MyFavorites />
           </Route>
-          {/* <Route path='/search/:searchQuery'>
-            <Search />
-          </Route> */}
+          <Route path='/search' exact={true}>
+            <Navigation isLoaded={isLoaded} />
+            <SearchPage />
+          </Route>
           <Route>
             <h1>Page Not Found</h1>
           </Route>

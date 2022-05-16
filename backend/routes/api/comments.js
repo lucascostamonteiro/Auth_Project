@@ -10,7 +10,7 @@ const commentValidation = [
     check('comment')
         .exists({ checkFalsy: true })
         .isLength({ min: 1 })
-        .withMessage('Comments cannot be empty'),
+        .withMessage('Please provide a comment'),
 ]
 
 // get comments for a specific image

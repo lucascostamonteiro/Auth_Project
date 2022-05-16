@@ -16,10 +16,11 @@ function ImageDetail({ image, showModal }) {
     const [hover, setHover] = useState(false);
 
     const user = useSelector(state => state.session.user);
-    const favorites = Object.values(useSelector(state => state.favorites.images));
     const userFavorites = Object.values(useSelector(state => state.favorites.user));
     const favoriteExists = userFavorites.filter(favorite => favorite?.imageId === image?.id);
 
+
+    // console.log('IMAGE', image)
 
     useEffect(() => {
         const validationErrors = [];
@@ -85,26 +86,27 @@ function ImageDetail({ image, showModal }) {
                         </div>
                     }
                 </div>
-
-                <img
-                    className="single-image-detail"
-                    key={image.id}
-                    src={image.imageUrl}
-                    alt={image.content}
-                    onError={handleImgError}>
-                </img>
-
-            </div>
-            {user && (user?.id === image?.userId) &&
                 <div>
-                    <button className="delete-button-image" onClick={deleteImage}>
-                        <i className="far fa-trash-alt"></i>
-                    </button >
-                    <button className="edit-button-image" onClick={() => { setEditable(!editable) }}>
-                        <i className="far fa-edit"></i>
-                    </button>
+                    <img
+                        className="single-image-detail"
+                        key={image.id}
+                        src={image.imageUrl}
+                        alt={image.content}
+                        onError={handleImgError}>
+                    </img>
+
                 </div>
-            }
+                {user && (user?.id === image?.userId) &&
+                    <div>
+                        <button className="delete-button-image" onClick={deleteImage}>
+                            <i className="far fa-trash-alt"></i>
+                        </button >
+                        <button className="edit-button-image" onClick={() => { setEditable(!editable) }}>
+                            <i className="far fa-edit"></i>
+                        </button>
+                    </div>
+                }
+            </div>
             <div>
                 {editable && (
                     <form className="edit-form" onSubmit={handleSubmit}>
@@ -113,14 +115,6 @@ function ImageDetail({ image, showModal }) {
                                 <li className='error' key={idx}>{error}</li>
                             ))}
                         </ul>
-                        {/* <input
-                            name='imageUrl'
-                            type="text"
-                            value={imageUrl}
-                            onChange={(e) => setImageUrl(e.target.value)}
-                            placeholder="Image URL"
-                            required
-                        /> */}
                         <label htmlFor="Description">Description</label>
                         <input
                             name='content'

@@ -5,6 +5,7 @@ import ProfileButton from './ProfileButton';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
 import NewImageFormModal from '../NewImageFormModal';
+import SearchBar from './SearchBar';
 import './Navigation.css';
 
 function Navigation({ isLoaded }) {
@@ -30,8 +31,13 @@ function Navigation({ isLoaded }) {
         <>
             <div className='main-navbar'>
                 <div className='left-navbar'>
-                    <NavLink exact to="/"> <div className='home-button'>Estádium</div></NavLink>
+                    <NavLink className="home-link" exact to="/"> <div className='home-button'>Estádium</div></NavLink>
                 </div>
+                {sessionUser &&
+                    <div className='center-navbar'>
+                        <SearchBar />
+                    </div>
+                }
                 <div className='right-navbar'>
                     {isLoaded && sessionLinks}
                 </div>
