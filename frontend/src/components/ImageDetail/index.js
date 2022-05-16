@@ -16,7 +16,6 @@ function ImageDetail({ image, showModal }) {
     const [hover, setHover] = useState(false);
 
     const user = useSelector(state => state.session.user);
-    // const favorites = Object.values(useSelector(state => state.favorites.images));
     const userFavorites = Object.values(useSelector(state => state.favorites.user));
     const favoriteExists = userFavorites.filter(favorite => favorite?.imageId === image?.id);
 

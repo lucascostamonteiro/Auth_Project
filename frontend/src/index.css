@@ -30,11 +30,22 @@ button:hover {
 }
 
 .image-div {
+  /* display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 7%; */
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-top: 7%;
+  padding-top: 3%;
+  padding-bottom: 4%;
+}
+
+.image-title {
+  padding-bottom: 20px;
+  font-size: 30px;
 }
 
 .single-image {
@@ -271,7 +282,8 @@ button:hover {
   cursor: zoom-in;
 }
 
-.favorites-title {
+.favorites-title,
+.search-title {
   margin-top: 90px;
   margin-left: 130px;
   text-decoration: underline;

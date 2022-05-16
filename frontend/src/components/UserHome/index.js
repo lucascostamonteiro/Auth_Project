@@ -12,7 +12,7 @@ function UserHome() {
         <ul>
             {images?.map((image, idx) => (
                 <div key={idx}>
-                    < SingleImage image={image} />
+                    <SingleImage image={image} />
                 </div>
             ))}
         </ul>
