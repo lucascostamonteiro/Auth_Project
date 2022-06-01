@@ -11,12 +11,10 @@ function NewImageForm({ showModal }) {
     const [errors, setErrors] = useState([]);
     const sessionUser = useSelector(state => state.session.user);
 
-    // TODO validate inside handleSubmit so it only shows after
 
     useEffect(() => {
         const validationErrors = [];
-        if (!imageUrl.length) validationErrors.push("Please provide an image with a valid file extension (.jpg, .jpeg, .gif, .png, .tiff)");
-        // if (imageUrl.length > 0 && !imageUrl.match(/^https?:\/\/.+\/.+$/)) validationErrors.push("Please provide a valid URL");
+        if (!imageUrl.length) validationErrors.push("Image file must end with a valid file extension (.jpg, .jpeg, .gif, .png, .tiff)");
         if (!content.length) validationErrors.push("Description must contain at least one character");
         setErrors(validationErrors);
     }, [imageUrl, content])
@@ -61,6 +59,7 @@ function NewImageForm({ showModal }) {
                     onChange={fileSelected}
                     type="file"
                     accept=".jpg, .jpeg, .gif, .png, .tiff"
+                    required
                 />
                 <input
                     type="description"
@@ -69,7 +68,7 @@ function NewImageForm({ showModal }) {
                     placeholder='Description'
                     required
                 />
-                <button id="image-form-button" type="submit">Share an Image</button>
+                <button id="image-form-button" type="submit">Share an image</button>
             </div>
         </form>
     );

@@ -38,7 +38,6 @@ router.put('/', commentValidation, asyncHandler(async (req, res) => {
 }))
 
 router.delete('/', asyncHandler(async (req, res) => {
-    console.log('REQ', req.body.id);
     const comment = await Comment.findByPk(req.body.id);
     await comment.destroy();
     return res.json(comment);

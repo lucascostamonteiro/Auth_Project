@@ -60,7 +60,7 @@ export const deleteFavorites = ({ id }) => async (dispatch) => {
 
   if (res.ok) {
     const unFavoritedImage = await res.json();
-    console.log('unFavoritedImage', unFavoritedImage);
+    // console.log('unFavoritedImage', unFavoritedImage);
     dispatch(removeFavorite(unFavoritedImage));
     return;
   } else {
