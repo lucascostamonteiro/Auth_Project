@@ -44,11 +44,12 @@ router.get('/', asyncHandler(async (req, res) => {
 // AWS S3 ROUTE
 router.post('/', singleMulterUpload("image"), asyncHandler(async (req, res) => {
     const { userId, content } = req.body;
-    const postImageUrl = await singlePublicFileUpload(req.file);
+    const imageUrl = await singlePublicFileUpload(req.file);
+    console.log('POST', imageUrl)
     const newImage = await Image.create({
         userId,
         content,
-        imageUrl: postImageUrl,
+        imageUrl,
     });
     const resImage = await Image.findByPk(newImage.id, {
         include: { model: Comment, include: [User] },
